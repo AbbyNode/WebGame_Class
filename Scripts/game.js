@@ -4,6 +4,7 @@ var game = (function () {
     var canvas;
     var stage;
     var helloLabel;
+    var byeLabel;
     function Start() {
         console.log("%c Game Started", "color: teal; font-size:20px;");
         canvas = document.getElementsByTagName('canvas')[0];
@@ -27,6 +28,8 @@ var game = (function () {
         // helloLabel.y = 240;
         helloLabel = new objects.Label("Hello!", "40px", "Consolas", "#000000", 320, 240, true);
         stage.addChild(helloLabel);
+        byeLabel = new objects.Label("Bye!", "40px", "Consolas", "#000000", 320, 400, true);
+        stage.addChild(byeLabel);
     }
     window.addEventListener("load", Start);
 })();

@@ -5,6 +5,7 @@ let game = (function() {
     let canvas:HTMLCanvasElement;
     let stage:createjs.Stage;
     let helloLabel:objects.Label;
+    let byeLabel:objects.Label;
 
     function Start():void {
         console.log(`%c Game Started`, "color: teal; font-size:20px;");
@@ -35,8 +36,10 @@ let game = (function() {
         // helloLabel.y = 240;
 
         helloLabel = new objects.Label("Hello!", "40px", "Consolas", "#000000", 320, 240, true);
-
         stage.addChild(helloLabel);
+
+        byeLabel = new objects.Label("Bye!", "40px", "Consolas", "#000000", 320, 400, true);
+        stage.addChild(byeLabel);
     }
 
     window.addEventListener("load", Start);
