@@ -1,0 +1,12 @@
+Yarn
+npm i yarn -g
+
+Typescript watch
+npm i tsc -g
+ctrl shift b > watch
+
+Documentation
+vs code extension > Document This
+/**/ > autofull
+
+
