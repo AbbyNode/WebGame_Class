@@ -5,12 +5,14 @@ var game = (function () {
     var stage;
     var helloLabel;
     var byeLabel;
+    var clickButton;
     function Start() {
         console.log("%c Game Started", "color: teal; font-size:20px;");
         canvas = document.getElementsByTagName('canvas')[0];
         stage = new createjs.Stage(canvas);
         createjs.Ticker.framerate = 60; // 60 fps
         createjs.Ticker.on('tick', Update);
+        stage.enableMouseOver(20);
         Main();
     }
     function Update() {
@@ -30,6 +32,21 @@ var game = (function () {
         stage.addChild(helloLabel);
         byeLabel = new objects.Label("Bye!", "40px", "Consolas", "#000000", 320, 400, true);
         stage.addChild(byeLabel);
+        clickButton = new createjs.Bitmap("./Assets/images/clickButton.png");
+        clickButton.regX = clickButton.getBounds().width * 0.5;
+        clickButton.regY = clickButton.getBounds().height * 0.5;
+        clickButton.x = 500;
+        clickButton.y = 400;
+        stage.addChild(clickButton);
+        clickButton.on("click", function () {
+            helloLabel.text = "Clicked!";
+        });
+        clickButton.on("mouseover", function () {
+            clickButton.alpha = 0.7;
+        });
+        clickButton.on("mouseout", function () {
+            clickButton.alpha = 1;
+        });
     }
     window.addEventListener("load", Start);
 })();

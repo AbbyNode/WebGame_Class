@@ -6,6 +6,7 @@ let game = (function() {
     let stage:createjs.Stage;
     let helloLabel:objects.Label;
     let byeLabel:objects.Label;
+    let clickButton:createjs.Bitmap;
 
     function Start():void {
         console.log(`%c Game Started`, "color: teal; font-size:20px;");
@@ -14,6 +15,8 @@ let game = (function() {
         createjs.Ticker.framerate = 60; // 60 fps
 
         createjs.Ticker.on('tick', Update);
+
+        stage.enableMouseOver(20);
 
         Main();
     }
@@ -40,6 +43,23 @@ let game = (function() {
 
         byeLabel = new objects.Label("Bye!", "40px", "Consolas", "#000000", 320, 400, true);
         stage.addChild(byeLabel);
+
+        clickButton = new createjs.Bitmap("./Assets/images/clickButton.png");
+        clickButton.regX = clickButton.getBounds().width * 0.5;
+        clickButton.regY = clickButton.getBounds().height * 0.5;
+        clickButton.x = 500;
+        clickButton.y = 400;
+        stage.addChild(clickButton);
+
+        clickButton.on("click", function() {
+            helloLabel.text = "Clicked!";
+        });
+        clickButton.on("mouseover", function() {
+            clickButton.alpha = 0.7;
+        });
+        clickButton.on("mouseout", function() {
+            clickButton.alpha = 1;
+        });
     }
 
     window.addEventListener("load", Start);

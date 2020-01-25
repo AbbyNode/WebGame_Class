@@ -6,6 +6,9 @@
   "repository": "https://github.com/AbbyNode/WebGame_Class.git",
   "author": "Abby Shah",
   "license": "MIT",
+	"scripts": {
+		"run": "lite-server"
+	},
   "dependencies": {
     "createjs": "^1.0.1",
     "easeljs": "^1.0.2",
