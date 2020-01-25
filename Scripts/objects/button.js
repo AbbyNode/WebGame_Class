@@ -21,8 +21,8 @@ var objects;
             _this.x = x;
             _this.y = y;
             if (isCentered) {
-                _this.regX = _this.getBounds().width * 0.5;
-                _this.regY = _this.getBounds().height * 0.5;
+                // this.regX = this.getBounds().width * 0.5;
+                // this.regY = this.getBounds().height * 0.5;
             }
             _this.on("mouseover", _this.mouseover);
             _this.on("mouseout", _this.mouseout);

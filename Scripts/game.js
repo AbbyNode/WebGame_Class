@@ -32,21 +32,22 @@ var game = (function () {
         stage.addChild(helloLabel);
         byeLabel = new objects.Label("Bye!", "40px", "Consolas", "#000000", 320, 400, true);
         stage.addChild(byeLabel);
-        clickButton = new createjs.Bitmap("./Assets/images/clickButton.png");
-        clickButton.regX = clickButton.getBounds().width * 0.5;
-        clickButton.regY = clickButton.getBounds().height * 0.5;
-        clickButton.x = 500;
-        clickButton.y = 400;
+        // clickButton = new createjs.Bitmap("./Assets/images/clickButton.png");
+        // clickButton.regX = clickButton.getBounds().width * 0.5;
+        // clickButton.regY = clickButton.getBounds().height * 0.5;
+        // clickButton.x = 500;
+        // clickButton.y = 400;
+        clickButton = new objects.Button("./Assets/images/clickButton.png", 500, 400, true);
         stage.addChild(clickButton);
         clickButton.on("click", function () {
             helloLabel.text = "Clicked!";
         });
-        clickButton.on("mouseover", function () {
-            clickButton.alpha = 0.7;
-        });
-        clickButton.on("mouseout", function () {
-            clickButton.alpha = 1;
-        });
+        // clickButton.on("mouseover", function() {
+        //     clickButton.alpha = 0.7;
+        // });
+        // clickButton.on("mouseout", function() {
+        //     clickButton.alpha = 1;
+        // });
     }
     window.addEventListener("load", Start);
 })();
