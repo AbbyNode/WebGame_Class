@@ -1,8 +1,10 @@
 Yarn
 npm i yarn -g
+yarn init
 
 Typescript watch
-npm i tsc -g
+npm i typescript -g
+tsc --init
 ctrl shift b > watch
 
 Documentation
