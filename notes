@@ -7,6 +7,8 @@ npm i typescript -g
 tsc --init
 ctrl shift b > watch
 
+lite-server
+
 Documentation
 vs code extension > Document This
 /**/ > autofull

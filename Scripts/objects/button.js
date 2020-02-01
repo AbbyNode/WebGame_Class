@@ -18,12 +18,14 @@ var objects;
         __extends(Button, _super);
         function Button(imgPath, x, y, isCentered) {
             var _this = _super.call(this, imgPath) || this;
-            _this.x = x;
-            _this.y = y;
-            if (isCentered) {
-                // this.regX = this.getBounds().width * 0.5;
-                // this.regY = this.getBounds().height * 0.5;
-            }
+            _this.image.addEventListener("load", function () {
+                _this.x = x;
+                _this.y = y;
+                if (isCentered) {
+                    _this.regX = _this.getBounds().width * 0.5;
+                    _this.regY = _this.getBounds().height * 0.5;
+                }
+            });
             _this.on("mouseover", _this.mouseover);
             _this.on("mouseout", _this.mouseout);
             return _this;

@@ -3,13 +3,15 @@ module objects {
         constructor(imgPath:string, x:number, y:number, isCentered:boolean) {
             super(imgPath);
 
-            this.x = x;
-            this.y = y;
+            this.image.addEventListener("load", ()=> {
+                this.x = x;
+                this.y = y;
 
-            if (isCentered)  {
-                // this.regX = this.getBounds().width * 0.5;
-                // this.regY = this.getBounds().height * 0.5;
-            }
+                if (isCentered)  {
+                    this.regX = this.getBounds().width * 0.5;
+                    this.regY = this.getBounds().height * 0.5;
+                }
+            });
 
             this.on("mouseover", this.mouseover);
             this.on("mouseout", this.mouseout);
