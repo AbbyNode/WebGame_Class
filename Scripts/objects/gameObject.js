@@ -37,10 +37,9 @@ var objects;
             _this._halfWidth = 0;
             _this._halfHeight = 0;
             _this._isColliding = false;
-            _this._position = new objects.Vector2();
+            _this._position = new objects.Vector2(0, 0);
             _this.image.addEventListener("load", function () {
-                _this.x = x;
-                _this.y = y;
+                _this.position = new objects.Vector2(x, y);
                 _this.width = _this.getBounds().width;
                 _this.height = _this.getBounds().height;
                 if (isCentered) {
@@ -111,5 +110,6 @@ var objects;
         });
         return GameObject;
     }(createjs.Bitmap));
+    objects.GameObject = GameObject;
 })(objects || (objects = {}));
-//# sourceMappingURL=gameObject.js.map
+//# sourceMappingURL=GameObject.js.map

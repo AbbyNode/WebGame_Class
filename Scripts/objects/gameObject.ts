@@ -1,5 +1,5 @@
 module objects {
-    abstract class GameObject extends createjs.Bitmap {
+    export abstract class GameObject extends createjs.Bitmap {
         // MEMBER VARIABLES
 
         private _width:number = 0;
@@ -7,7 +7,7 @@ module objects {
         private _halfWidth:number = 0;
         private _halfHeight:number = 0;
         private _isColliding:boolean = false;
-        private _position:Vector2 = new Vector2();
+        private _position:Vector2 = new Vector2(0, 0);
 
         // PROPERTIES
 
@@ -67,8 +67,7 @@ module objects {
             super(imagePath);
 
             this.image.addEventListener("load", ()=> {
-                this.x = x;
-                this.y = y;
+                this.position = new Vector2(x, y);
 
                 this.width = this.getBounds().width;
                 this.height = this.getBounds().height;
@@ -86,10 +85,10 @@ module objects {
 
         // PUBLIC METHODS
 
-        public abstract Start():void;
+        public abstract start():void;
 
-        public abstract Update():void;
+        public abstract update():void;
 
-        public abstract Reset():void;
+        public abstract reset():void;
     }
 }

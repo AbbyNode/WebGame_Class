@@ -17,15 +17,10 @@ var objects;
     var Button = /** @class */ (function (_super) {
         __extends(Button, _super);
         function Button(imgPath, x, y, isCentered) {
-            var _this = _super.call(this, imgPath) || this;
-            _this.image.addEventListener("load", function () {
-                _this.x = x;
-                _this.y = y;
-                if (isCentered) {
-                    _this.regX = _this.getBounds().width * 0.5;
-                    _this.regY = _this.getBounds().height * 0.5;
-                }
-            });
+            if (x === void 0) { x = 0; }
+            if (y === void 0) { y = 0; }
+            if (isCentered === void 0) { isCentered = true; }
+            var _this = _super.call(this, imgPath, x, y, isCentered) || this;
             _this.on("mouseover", _this.mouseover);
             _this.on("mouseout", _this.mouseout);
             return _this;
@@ -37,8 +32,22 @@ var objects;
         Button.prototype.mouseout = function () {
             this.alpha = 1;
         };
+        // PROTECTED METHODS
+        Button.prototype._checkBounds = function () {
+            // throw new Error("Method not implemented.");
+        };
+        // PUBLIC METHODS
+        Button.prototype.start = function () {
+            // throw new Error("Method not implemented.");
+        };
+        Button.prototype.update = function () {
+            // throw new Error("Method not implemented.");
+        };
+        Button.prototype.reset = function () {
+            // throw new Error("Method not implemented.");
+        };
         return Button;
-    }(createjs.Bitmap));
+    }(objects.GameObject));
     objects.Button = Button;
 })(objects || (objects = {}));
-//# sourceMappingURL=button.js.map
+//# sourceMappingURL=Button.js.map

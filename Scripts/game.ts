@@ -8,27 +8,27 @@ let game = (function() {
     let byeLabel:objects.Label;
     let clickButton:createjs.Bitmap;
 
-    function Start():void {
+    function start():void {
         console.log(`%c Game Started`, "color: teal; font-size:20px;");
         canvas = document.getElementsByTagName('canvas')[0];
         stage = new createjs.Stage(canvas);
         createjs.Ticker.framerate = 60; // 60 fps
 
-        createjs.Ticker.on('tick', Update);
+        createjs.Ticker.on('tick', update);
 
         stage.enableMouseOver(20);
 
-        Main();
+        main();
     }
 
-    function Update():void {
+    function update():void {
         // console.log("ok");
         stage.update();
         
         helloLabel.rotation += 5;
     }
 
-    function Main():void {
+    function main():void {
         console.log(`%c Main Started`, "color: teal; font-size:16px;");
 
         // helloLabel = new createjs.Text("Hello World", "40px Consolas", "#000000");
@@ -66,5 +66,5 @@ let game = (function() {
 
     }
 
-    window.addEventListener("load", Start);
+    window.addEventListener("load", start);
 })();

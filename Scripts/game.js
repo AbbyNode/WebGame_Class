@@ -6,21 +6,21 @@ var game = (function () {
     var helloLabel;
     var byeLabel;
     var clickButton;
-    function Start() {
+    function start() {
         console.log("%c Game Started", "color: teal; font-size:20px;");
         canvas = document.getElementsByTagName('canvas')[0];
         stage = new createjs.Stage(canvas);
         createjs.Ticker.framerate = 60; // 60 fps
-        createjs.Ticker.on('tick', Update);
+        createjs.Ticker.on('tick', update);
         stage.enableMouseOver(20);
-        Main();
+        main();
     }
-    function Update() {
+    function update() {
         // console.log("ok");
         stage.update();
         helloLabel.rotation += 5;
     }
-    function Main() {
+    function main() {
         console.log("%c Main Started", "color: teal; font-size:16px;");
         // helloLabel = new createjs.Text("Hello World", "40px Consolas", "#000000");
         // // sets pivot point to center of label
@@ -49,6 +49,6 @@ var game = (function () {
         //     clickButton.alpha = 1;
         // });
     }
-    window.addEventListener("load", Start);
+    window.addEventListener("load", start);
 })();
 //# sourceMappingURL=game.js.map

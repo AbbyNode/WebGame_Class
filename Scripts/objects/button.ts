@@ -1,17 +1,7 @@
 module objects {
-    export class Button extends createjs.Bitmap {
-        constructor(imgPath:string, x:number, y:number, isCentered:boolean) {
-            super(imgPath);
-
-            this.image.addEventListener("load", ()=> {
-                this.x = x;
-                this.y = y;
-
-                if (isCentered)  {
-                    this.regX = this.getBounds().width * 0.5;
-                    this.regY = this.getBounds().height * 0.5;
-                }
-            });
+    export class Button extends objects.GameObject {
+        constructor(imgPath:string, x:number=0, y:number=0, isCentered:boolean=true) {
+            super(imgPath, x, y, isCentered);
 
             this.on("mouseover", this.mouseover);
             this.on("mouseout", this.mouseout);
@@ -24,6 +14,24 @@ module objects {
 
         mouseout():void {
             this.alpha = 1;
+        }
+        
+        // PROTECTED METHODS
+
+        protected _checkBounds(): void {
+            // throw new Error("Method not implemented.");
+        }
+
+        // PUBLIC METHODS
+
+        public start(): void {
+            // throw new Error("Method not implemented.");
+        }
+        public update(): void {
+            // throw new Error("Method not implemented.");
+        }
+        public reset(): void {
+            // throw new Error("Method not implemented.");
         }
     }
 }
