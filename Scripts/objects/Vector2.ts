@@ -40,6 +40,12 @@ module objects {
             this._sqrMagnitude = sqrMagnitude;
         }
 
+        get normalized():Vector2 {
+            let vector2 = new Vector2(this.x, this.y);
+            vector2.normalize();
+            return vector2;
+        }
+
         // CONSTRUCTOR
 
         constructor(x:number = 0, y:number = 0) {
@@ -90,6 +96,16 @@ module objects {
 
         public static left():Vector2 {
             return new Vector2(-1, 0);
+        }
+
+        public normalize() {
+            let magnitude = this.magnitude;
+            if (magnitude > 9.99999974737875E-06) {
+                this.x = this.x / magnitude;
+                this.y = this.y / magnitude;
+            } else {
+                return Vector2.zero();
+            }
         }
 
         public static dot(lhs:Vector2, rhs:Vector2):number {

@@ -8,6 +8,7 @@ module objects {
         private _halfHeight:number = 0;
         private _isColliding:boolean = false;
         private _position:Vector2 = new Vector2(0, 0);
+        private _isCentered:boolean = false;
 
         // PROPERTIES
 
@@ -53,6 +54,21 @@ module objects {
             this.y = position.y;
         }
 
+        get isCentered():boolean {
+            return this._isCentered;
+        }
+
+        set isCentered(isCentered:boolean) {
+            this._isCentered = isCentered;
+            if (isCentered) {
+                this.regX = this._halfWidth;
+                this.regY = this._halfHeight;
+            } else {
+                this.regX = 0;
+                this.regY = 0;
+            }
+        }
+
         // CONSTRUCTOR
 
         /**
@@ -72,10 +88,7 @@ module objects {
                 this.width = this.getBounds().width;
                 this.height = this.getBounds().height;
 
-                if (isCentered)  {
-                    this.regX = this._halfWidth;
-                    this.regY = this._halfHeight;
-                }
+                this.isCentered = isCentered;
             });
         }
 

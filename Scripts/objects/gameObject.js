@@ -38,14 +38,12 @@ var objects;
             _this._halfHeight = 0;
             _this._isColliding = false;
             _this._position = new objects.Vector2(0, 0);
+            _this._isCentered = false;
             _this.image.addEventListener("load", function () {
                 _this.position = new objects.Vector2(x, y);
                 _this.width = _this.getBounds().width;
                 _this.height = _this.getBounds().height;
-                if (isCentered) {
-                    _this.regX = _this._halfWidth;
-                    _this.regY = _this._halfHeight;
-                }
+                _this.isCentered = isCentered;
             });
             return _this;
         }
@@ -104,6 +102,24 @@ var objects;
                 this._position = position;
                 this.x = position.x;
                 this.y = position.y;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(GameObject.prototype, "isCentered", {
+            get: function () {
+                return this._isCentered;
+            },
+            set: function (isCentered) {
+                this._isCentered = isCentered;
+                if (isCentered) {
+                    this.regX = this._halfWidth;
+                    this.regY = this._halfHeight;
+                }
+                else {
+                    this.regX = 0;
+                    this.regY = 0;
+                }
             },
             enumerable: true,
             configurable: true

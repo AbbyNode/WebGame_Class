@@ -14,3 +14,12 @@ vs code extension > Document This
 /**/ > autofull
 
 
+TODO
+
+Check how to do debugging in vscode
+https://marketplace.visualstudio.com/items?itemName=msjsdiag.debugger-for-chrome
+
+also how to use modules without html
+https://stackoverflow.com/questions/34581714/why-does-this-typescript-output-class-is-not-a-constructor
+
+

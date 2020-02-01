@@ -57,6 +57,15 @@ var objects;
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(Vector2.prototype, "normalized", {
+            get: function () {
+                var vector2 = new Vector2(this.x, this.y);
+                vector2.normalize();
+                return vector2;
+            },
+            enumerable: true,
+            configurable: true
+        });
         // PRIVATE METHODS
         // PUBLIC METHODS
         Vector2.prototype.add = function (addVector) {
@@ -88,6 +97,16 @@ var objects;
         };
         Vector2.left = function () {
             return new Vector2(-1, 0);
+        };
+        Vector2.prototype.normalize = function () {
+            var magnitude = this.magnitude;
+            if (magnitude > 9.99999974737875E-06) {
+                this.x = this.x / magnitude;
+                this.y = this.y / magnitude;
+            }
+            else {
+                return Vector2.zero();
+            }
         };
         Vector2.dot = function (lhs, rhs) {
             return lhs.x * rhs.x + lhs.y * rhs.y;

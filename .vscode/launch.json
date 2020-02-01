@@ -5,13 +5,9 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "type": "node",
+            "type": "chrome",
             "request": "launch",
             "name": "Launch Program",
-            "program": "${workspaceFolder}\\game.js",
-            "outFiles": [
-                "${workspaceFolder}/**/*.js"
-            ]
         }
     ]
 }
