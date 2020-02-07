@@ -7,7 +7,7 @@
   "author": "Abby Shah",
   "license": "MIT",
   "scripts": {
-    "run": "tsc && lite-server"
+    "test": "tsc && lite-server"
   },
   "dependencies": {
     "createjs": "^1.0.1",
@@ -21,6 +21,8 @@
     "@types/easeljs": "^1.0.0",
     "@types/preloadjs": "^0.6.32",
     "@types/soundjs": "^0.6.27",
-    "@types/tweenjs": "^1.0.0"
+    "@types/tweenjs": "^1.0.0",
+    "lite-server": "^2.5.4",
+    "typescript": "^3.7.5"
   }
 }
