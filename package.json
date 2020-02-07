@@ -7,7 +7,7 @@
   "author": "Abby Shah",
   "license": "MIT",
   "scripts": {
-    "run": "lite-server"
+    "run": "tsc && lite-server"
   },
   "dependencies": {
     "createjs": "^1.0.1",

@@ -41,4 +41,4 @@ var objects;
     }(createjs.Text));
     objects.Label = Label;
 })(objects || (objects = {}));
-//# sourceMappingURL=Label.js.map
+//# sourceMappingURL=label.js.map

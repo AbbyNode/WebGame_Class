@@ -128,4 +128,4 @@ var objects;
     }(createjs.Bitmap));
     objects.GameObject = GameObject;
 })(objects || (objects = {}));
-//# sourceMappingURL=GameObject.js.map
+//# sourceMappingURL=gameObject.js.map
