@@ -1,6 +1,6 @@
 module objects {
     export class Button extends objects.GameObject {
-        constructor(imgPath:string, x:number=0, y:number=0, isCentered:boolean=true) {
+        constructor(imgPath:string="./Assets/images/default.png", x:number=0, y:number=0, isCentered:boolean=true) {
             super(imgPath, x, y, isCentered);
 
             this.on("mouseover", this.mouseover);

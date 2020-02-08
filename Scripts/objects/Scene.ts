@@ -2,6 +2,8 @@ module objects {
     export abstract class Scene extends createjs.Container {
         constructor() {
             super();
+
+            this.Start();
         }
 
         /**
@@ -19,7 +21,6 @@ module objects {
          * @memberof Scene
          */
         public abstract Update():void;
-
 
     }
 }

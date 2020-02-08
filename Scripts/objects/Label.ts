@@ -11,9 +11,9 @@ module objects {
          * @param {boolean} isCentered
          * @memberof Label
          */
-        constructor(text:string,
-             fontSize:string, fontFamily:string, fontColor:string,
-             x:number, y:number, isCentered:boolean) {
+        constructor(text:string = "label",
+             fontSize:string = "1", fontFamily:string = "Consolas", fontColor:string = "#000000",
+             x:number = 0, y:number = 0, isCentered:boolean = true) {
             super(text, `${fontSize} ${fontFamily}`, fontColor);
             if (isCentered) {
                 this.regX = this.getBounds().width * 0.5;

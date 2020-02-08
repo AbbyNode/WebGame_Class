@@ -31,11 +31,6 @@ let game = (function() {
         // console.log("ok");
         // helloLabel.rotation += 5;
 
-        player.update();
-
-        // managers.Collision.squaredRadiusCheck(player, startButton);
-        managers.Collision.AABBCheck(player, startButton);
-
         stage.update();
         
     }
@@ -45,16 +40,6 @@ let game = (function() {
 
         // this.helloWorld();
         
-        title = new objects.Label("The Game", "40px", "Consolas", "#000000", 320, 240, true);
-        stage.addChild(title);
-
-        startButton = new objects.Button("./Assets/images/startButton.png", 350, 300, true);
-        stage.addChild(startButton);        
-        startButton.on("click", function() {
-        });
-
-        player = new objects.Player();
-        stage.addChild(player);
 
         console.log(player.regX);
     }
