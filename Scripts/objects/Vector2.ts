@@ -142,5 +142,12 @@ module objects {
             let yDiff = (p2.y - p1.y);
             return xDiff * xDiff + yDiff * yDiff;
         }
+
+        public static subtract(lhs:Vector2, rhs:Vector2):Vector2 {
+            return new Vector2(
+                lhs.x - rhs.x,
+                lhs.y - rhs.y
+            );
+        }
     }
 }

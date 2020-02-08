@@ -33,7 +33,8 @@ let game = (function() {
 
         player.update();
 
-        managers.Collision.squaredRadiusCheck(player, startButton);
+        // managers.Collision.squaredRadiusCheck(player, startButton);
+        managers.Collision.AABBCheck(player, startButton);
 
         stage.update();
         

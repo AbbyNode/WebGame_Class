@@ -140,6 +140,9 @@ var objects;
             var yDiff = (p2.y - p1.y);
             return xDiff * xDiff + yDiff * yDiff;
         };
+        Vector2.subtract = function (lhs, rhs) {
+            return new Vector2(lhs.x - rhs.x, lhs.y - rhs.y);
+        };
         return Vector2;
     }());
     objects.Vector2 = Vector2;
