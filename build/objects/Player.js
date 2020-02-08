@@ -30,6 +30,8 @@ var objects;
         Player.prototype.update = function () {
             var stage = config.Game.STAGE;
             this.position = new objects.Vector2(stage.mouseX, stage.mouseY);
+            // TODO: Check Tom's GitHub for mouse fix
+            // https://github.com/CentennialCollege/COMP397-W2020-Lesson5B
         };
         Player.prototype.reset = function () {
             // throw new Error("Method not implemented.");

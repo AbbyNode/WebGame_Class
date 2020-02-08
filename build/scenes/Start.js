@@ -16,31 +16,32 @@ var scenes;
 (function (scenes) {
     var Start = /** @class */ (function (_super) {
         __extends(Start, _super);
+        // player:objects.Player;
         function Start() {
             var _this = _super.call(this) || this;
             _this.startLabel = new objects.Label();
             _this.startButton = new objects.Button();
-            _this.player = new objects.Player();
             return _this;
+            // this.player = new objects.Player();
         }
         Start.prototype.Start = function () {
             this.startLabel = new objects.Label("The Game", "40px", "Consolas", "#000000", 320, 240, true);
             this.startButton = new objects.Button("./Assets/images/startButton.png", 350, 300, true);
-            this.player = new objects.Player();
+            // this.player = new objects.Player();
             this.Main();
         };
         Start.prototype.Update = function () {
-            this.player.update();
+            // this.player.update();
             // managers.Collision.squaredRadiusCheck(player, startButton);
-            managers.Collision.AABBCheck(this.player, this.startButton);
+            // managers.Collision.AABBCheck(this.player, this.startButton);
         };
         Start.prototype.Main = function () {
             this.addChild(this.startLabel);
             this.addChild(this.startButton);
             this.startButton.on("click", function () {
-                console.log("Clicked button");
+                config.Game.SCENE_STATE = scenes.State.PLAY;
             });
-            this.addChild(this.player);
+            // this.addChild(this.player);
         };
         return Start;
     }(objects.Scene));

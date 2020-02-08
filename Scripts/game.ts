@@ -5,7 +5,8 @@ let game = (function() {
     let canvas:HTMLCanvasElement;
     let stage:createjs.Stage;
 
-    let startScene:scenes.Start;
+    let currentScene: objects.Scene;
+    let currentSceneState: scenes.State;
 
     // let helloLabel:objects.Label;
     // let byeLabel:objects.Label;
@@ -27,7 +28,9 @@ let game = (function() {
 
         stage.enableMouseOver(20);
 
-        main();
+        // Switch scene?
+        currentSceneState = scenes.State.NO_SCENE;
+        config.Game.SCENE_STATE = scenes.State.START;
     }
 
     function update():void {
@@ -36,16 +39,40 @@ let game = (function() {
 
         stage.update();
 
-        startScene.Update();
+        if (currentSceneState != config.Game.SCENE_STATE) {
+            initScene();
+        }
+
+        // startScene.Update();
     }
 
-    function main():void {
+    function initScene():void {
         // console.log(`%c Main Started`, "color: teal; font-size:16px;");
         // this.helloWorld();
         // console.log(player.regX);
 
-        startScene = new scenes.Start();
-        stage.addChild(startScene);
+        if (currentSceneState != scenes.State.NO_SCENE) {
+            currentScene.removeAllChildren();
+            stage.removeAllChildren();
+        }
+
+        switch(config.Game.SCENE_STATE) {
+            case scenes.State.START:
+                currentScene = new scenes.Start();
+                break;
+            case scenes.State.PLAY:
+                currentScene = new scenes.Play();
+                break;
+            case scenes.State.END:
+                // currentScene = new scenes.Play();
+                break;
+        }
+
+        // startScene = new scenes.Start();
+
+        // Add scene to stage and setup current scene
+        stage.addChild(currentScene);
+        currentSceneState = config.Game.SCENE_STATE;
     }
 
     function helloWorld():void {

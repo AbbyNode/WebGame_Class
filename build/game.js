@@ -3,7 +3,8 @@
 var game = (function () {
     var canvas;
     var stage;
-    var startScene;
+    var currentScene;
+    var currentSceneState;
     // let helloLabel:objects.Label;
     // let byeLabel:objects.Label;
     // let clickButton:createjs.Bitmap;
@@ -18,20 +19,42 @@ var game = (function () {
         createjs.Ticker.framerate = 60; // 60 fps
         createjs.Ticker.on('tick', update);
         stage.enableMouseOver(20);
-        main();
+        // Switch scene?
+        currentSceneState = scenes.State.NO_SCENE;
+        config.Game.SCENE_STATE = scenes.State.START;
     }
     function update() {
         // console.log("ok");
         // helloLabel.rotation += 5;
         stage.update();
-        startScene.Update();
+        if (currentSceneState != config.Game.SCENE_STATE) {
+            initScene();
+        }
+        // startScene.Update();
     }
-    function main() {
+    function initScene() {
         // console.log(`%c Main Started`, "color: teal; font-size:16px;");
         // this.helloWorld();
         // console.log(player.regX);
-        startScene = new scenes.Start();
-        stage.addChild(startScene);
+        if (currentSceneState != scenes.State.NO_SCENE) {
+            currentScene.removeAllChildren();
+            stage.removeAllChildren();
+        }
+        switch (config.Game.SCENE_STATE) {
+            case scenes.State.START:
+                currentScene = new scenes.Start();
+                break;
+            case scenes.State.PLAY:
+                currentScene = new scenes.Play();
+                break;
+            case scenes.State.END:
+                // currentScene = new scenes.Play();
+                break;
+        }
+        // startScene = new scenes.Start();
+        // Add scene to stage and setup current scene
+        stage.addChild(currentScene);
+        currentSceneState = config.Game.SCENE_STATE;
     }
     function helloWorld() {
         // helloLabel = new createjs.Text("Hello World", "40px Consolas", "#000000");

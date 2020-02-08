@@ -1,5 +1,14 @@
 module objects {
     export abstract class Scene extends createjs.Container {
+        
+        private _state : scenes.State = scenes.State.NO_SCENE;
+        public get state() : scenes.State {
+            return this._state;
+        }
+        public set state(v : scenes.State) {
+            this._state = v;
+        }
+        
         constructor() {
             super();
 
