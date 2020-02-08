@@ -13,7 +13,8 @@ module objects {
             // this.isCentered = true;
         }
         public update(): void {
-            this.position = new Vector2(this.stage.mouseX, this.stage.mouseY);
+            let stage = config.Game.STAGE;
+            this.position = new Vector2(stage.mouseX, stage.mouseY);
         }
         public reset(): void {
             // throw new Error("Method not implemented.");

@@ -5,21 +5,24 @@ let game = (function() {
     let canvas:HTMLCanvasElement;
     let stage:createjs.Stage;
 
+    let startScene:scenes.Start;
+
     // let helloLabel:objects.Label;
     // let byeLabel:objects.Label;
     // let clickButton:createjs.Bitmap;
 
-    let title:objects.Label;
-    let startButton:objects.Button;
-
-    let player:objects.Player;
+    // let title:objects.Label;
+    // let startButton:objects.Button;
+    // let player:objects.Player;
 
     function start():void {
-        console.log(`%c Game Started`, "color: teal; font-size:20px;");
+        // console.log(`%c Game Started`, "color: teal; font-size:20px;");
         canvas = document.getElementsByTagName('canvas')[0];
         stage = new createjs.Stage(canvas);
-        createjs.Ticker.framerate = 60; // 60 fps
 
+        config.Game.STAGE = stage;
+
+        createjs.Ticker.framerate = 60; // 60 fps
         createjs.Ticker.on('tick', update);
 
         stage.enableMouseOver(20);
@@ -32,16 +35,17 @@ let game = (function() {
         // helloLabel.rotation += 5;
 
         stage.update();
-        
+
+        startScene.Update();
     }
 
     function main():void {
-        console.log(`%c Main Started`, "color: teal; font-size:16px;");
-
+        // console.log(`%c Main Started`, "color: teal; font-size:16px;");
         // this.helloWorld();
-        
+        // console.log(player.regX);
 
-        console.log(player.regX);
+        startScene = new scenes.Start();
+        stage.addChild(startScene);
     }
 
     function helloWorld():void {

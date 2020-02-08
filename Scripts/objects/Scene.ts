@@ -21,6 +21,5 @@ module objects {
          * @memberof Scene
          */
         public abstract Update():void;
-
     }
 }

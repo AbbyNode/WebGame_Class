@@ -17,7 +17,9 @@ var objects;
     var Scene = /** @class */ (function (_super) {
         __extends(Scene, _super);
         function Scene() {
-            return _super.call(this) || this;
+            var _this = _super.call(this) || this;
+            _this.Start();
+            return _this;
         }
         return Scene;
     }(createjs.Container));

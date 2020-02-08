@@ -28,6 +28,13 @@ var objects;
          * @memberof Label
          */
         function Label(text, fontSize, fontFamily, fontColor, x, y, isCentered) {
+            if (text === void 0) { text = "label"; }
+            if (fontSize === void 0) { fontSize = "1"; }
+            if (fontFamily === void 0) { fontFamily = "Consolas"; }
+            if (fontColor === void 0) { fontColor = "#000000"; }
+            if (x === void 0) { x = 0; }
+            if (y === void 0) { y = 0; }
+            if (isCentered === void 0) { isCentered = true; }
             var _this = _super.call(this, text, fontSize + " " + fontFamily, fontColor) || this;
             if (isCentered) {
                 _this.regX = _this.getBounds().width * 0.5;

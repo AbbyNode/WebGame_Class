@@ -17,6 +17,7 @@ var objects;
     var Button = /** @class */ (function (_super) {
         __extends(Button, _super);
         function Button(imgPath, x, y, isCentered) {
+            if (imgPath === void 0) { imgPath = "./Assets/images/default.png"; }
             if (x === void 0) { x = 0; }
             if (y === void 0) { y = 0; }
             if (isCentered === void 0) { isCentered = true; }

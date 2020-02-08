@@ -3,16 +3,18 @@
 var game = (function () {
     var canvas;
     var stage;
+    var startScene;
     // let helloLabel:objects.Label;
     // let byeLabel:objects.Label;
     // let clickButton:createjs.Bitmap;
-    var title;
-    var startButton;
-    var player;
+    // let title:objects.Label;
+    // let startButton:objects.Button;
+    // let player:objects.Player;
     function start() {
-        console.log("%c Game Started", "color: teal; font-size:20px;");
+        // console.log(`%c Game Started`, "color: teal; font-size:20px;");
         canvas = document.getElementsByTagName('canvas')[0];
         stage = new createjs.Stage(canvas);
+        config.Game.STAGE = stage;
         createjs.Ticker.framerate = 60; // 60 fps
         createjs.Ticker.on('tick', update);
         stage.enableMouseOver(20);
@@ -21,23 +23,15 @@ var game = (function () {
     function update() {
         // console.log("ok");
         // helloLabel.rotation += 5;
-        player.update();
-        // managers.Collision.squaredRadiusCheck(player, startButton);
-        managers.Collision.AABBCheck(player, startButton);
         stage.update();
+        startScene.Update();
     }
     function main() {
-        console.log("%c Main Started", "color: teal; font-size:16px;");
+        // console.log(`%c Main Started`, "color: teal; font-size:16px;");
         // this.helloWorld();
-        title = new objects.Label("The Game", "40px", "Consolas", "#000000", 320, 240, true);
-        stage.addChild(title);
-        startButton = new objects.Button("./Assets/images/startButton.png", 350, 300, true);
-        stage.addChild(startButton);
-        startButton.on("click", function () {
-        });
-        player = new objects.Player();
-        stage.addChild(player);
-        console.log(player.regX);
+        // console.log(player.regX);
+        startScene = new scenes.Start();
+        stage.addChild(startScene);
     }
     function helloWorld() {
         // helloLabel = new createjs.Text("Hello World", "40px Consolas", "#000000");

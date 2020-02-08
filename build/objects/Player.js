@@ -28,7 +28,8 @@ var objects;
             // this.isCentered = true;
         };
         Player.prototype.update = function () {
-            this.position = new objects.Vector2(this.stage.mouseX, this.stage.mouseY);
+            var stage = config.Game.STAGE;
+            this.position = new objects.Vector2(stage.mouseX, stage.mouseY);
         };
         Player.prototype.reset = function () {
             // throw new Error("Method not implemented.");

@@ -16,6 +16,8 @@ module scenes {
             this.startLabel = new objects.Label("The Game", "40px", "Consolas", "#000000", 320, 240, true);
             this.startButton = new objects.Button("./Assets/images/startButton.png", 350, 300, true);
             this.player = new objects.Player();
+
+            this.Main();
         }
 
         public Update(): void {
@@ -26,7 +28,6 @@ module scenes {
         }
 
         public Main(): void {
-
             this.addChild(this.startLabel);
 
             this.addChild(this.startButton);
@@ -35,7 +36,6 @@ module scenes {
             });
 
             this.addChild(this.player);
-
         }
     }
 }
