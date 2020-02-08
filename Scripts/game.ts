@@ -33,12 +33,7 @@ let game = (function() {
 
         player.update();
 
-        let sqrDistance = objects.Vector2.sqrDistance(player.position, startButton.position);
-        let radii = player.halfWidth + startButton.halfWidth;
-
-        if (sqrDistance <= (radii*radii)) {
-            console.log("collision");
-        }
+        managers.Collision.squaredRadiusCheck(player, startButton);
 
         stage.update();
         

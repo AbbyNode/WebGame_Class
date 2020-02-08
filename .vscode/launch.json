@@ -7,7 +7,9 @@
         {
             "type": "chrome",
             "request": "launch",
-            "name": "Launch Program",
+            "name": "Launch localhost on Chrome",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}"
         }
     ]
 }
