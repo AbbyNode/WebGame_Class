@@ -1,37 +1,61 @@
-module objects {
-    export class Button extends objects.GameObject {
-        constructor(imgPath:string="./Assets/images/default.png", x:number=0, y:number=0, isCentered:boolean=true) {
-            super(imgPath, x, y, isCentered);
+module objects 
+{
+    export class Button extends GameObject
+    {
+        // constructor
+        constructor(
+            imagePath:string = "./Assets/images/placeholder.png", 
+            x:number = 0, y:number = 0, isCentered:boolean = true)
+        {
+            super(imagePath, x, y, isCentered);
 
-            this.on("mouseover", this.mouseover);
-            this.on("mouseout", this.mouseout);
+            this.on("mouseover", this.HoverOver);
+            this.on("mouseout", this.HoverOut);
+
+            this.Start();
         }
 
-        // method
-        mouseover():void {
+        // PRIVATE LIFE CYCLE METHODS
+        protected _checkBounds():void
+        {
+
+        }
+
+
+        // PUBLIC Methods
+        HoverOver():void
+        {
             this.alpha = 0.7;
         }
 
-        mouseout():void {
-            this.alpha = 1;
-        }
-        
-        // PROTECTED METHODS
-
-        protected _checkBounds(): void {
-            // throw new Error("Method not implemented.");
+        HoverOut():void
+        {
+            this.alpha = 1.0;
         }
 
-        // PUBLIC METHODS
+        // PUBLIC LIFE CYCLE METHODS
 
-        public start(): void {
-            // throw new Error("Method not implemented.");
+        /**
+         * Initialization happens here
+         *
+         * @memberof Button
+         */
+        public Start():void
+        {
+
         }
-        public update(): void {
-            // throw new Error("Method not implemented.");
+
+        public Update():void
+        {
+
         }
-        public reset(): void {
-            // throw new Error("Method not implemented.");
+
+        public Reset():void
+        {
+
         }
+
+
+
     }
 }

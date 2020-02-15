@@ -1,41 +1,51 @@
-module scenes {
-    export class Play extends objects.Scene {
-        // startLabel:objects.Label;
-        // startButton:objects.Button;
-        player:objects.Player;
+module scenes
+{
+    export class Play extends objects.Scene
+    {
+        // PRIVATE INSTANCE MEMBERS
+        playLabel:objects.Label;
+        nextButton:objects.Button;
 
-        constructor() {
+        // PUBLIC PROPERTIES
+
+        // CONSTRUCTOR
+        constructor()
+        {
             super();
 
-            // this.startLabel = new objects.Label();
-            // this.startButton = new objects.Button();
-            this.player = new objects.Player();
+            // initialization
+            this.playLabel = new objects.Label();
+            this.nextButton = new objects.Button();
+
+            this.Start();
         }
 
-        public Start(): void {
-            // this.startLabel = new objects.Label("The Game", "40px", "Consolas", "#000000", 320, 240, true);
-            // this.startButton = new objects.Button("./Assets/images/startButton.png", 350, 300, true);
-            this.player = new objects.Player();
+        // PUBLIC METHODS
 
+        public Start(): void 
+        {
+            this.playLabel = new objects.Label("Place Scene", "80px","Consolas", "#000000", 320, 200, true);
+            this.nextButton = new objects.Button("./Assets/images/nextButton.png", 320, 400, true);
+           
             this.Main();
+        }        
+        
+        public Update(): void 
+        {
+            
         }
-
-        public Update(): void {
-            this.player.update();
-
-            // managers.Collision.squaredRadiusCheck(player, startButton);
-            // managers.Collision.AABBCheck(this.player, this.startButton);
-        }
-
+        
         public Main(): void {
-            // this.addChild(this.startLabel);
-
-            // this.addChild(this.startButton);
-            // this.startButton.on("click", function () {
-            //     config.Game.SCENE_STATE = scenes.State.PLAY;
-            // });
-
-            this.addChild(this.player);
+            
+            this.addChild(this.playLabel);
+    
+            this.addChild(this.nextButton);
+    
+            this.nextButton.on("click", function() {
+               config.Game.SCENE_STATE = scenes.State.END;
+            });
         }
+
+        
     }
 }
