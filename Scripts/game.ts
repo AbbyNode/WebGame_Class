@@ -7,6 +7,21 @@ let game = (function () {
 	let currentSceneState: scenes.State;
 	let currentScene: objects.Scene;
 
+	let assetManifest = [
+		{id: "startButton", src: "./Assets/images/startButton.png"},
+		{id: "placeholder", src: "./Assets/images/placeholder.png"},
+		{id: "ocean", src: "./Assets/images/ocean.gif"},
+	];
+
+	function Preload(): void {
+		let loadQueue = new createjs.LoadQueue();
+		loadQueue.installPlugin(createjs.Sound);
+		loadQueue.on("complete", Start);
+		config.Game.ASSETS = loadQueue;
+
+		loadQueue.loadManifest(assetManifest);
+	}
+
     /**
      * Perform Initialization in the Start function
      *
@@ -69,5 +84,5 @@ let game = (function () {
 		currentSceneState = config.Game.SCENE_STATE;
 	}
 
-	window.addEventListener("load", Start);
+	window.addEventListener("load", Preload);
 })();
