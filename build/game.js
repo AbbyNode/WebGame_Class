@@ -13,6 +13,7 @@ var game = (function () {
         { id: "nextButton", src: "./Assets/images/nextButton.png" },
         { id: "backButton", src: "./Assets/images/backButton.png" },
         { id: "ocean", src: "./Assets/images/ocean.gif" },
+        { id: "plane", src: "./Assets/images/plane.png" }
     ];
     function Preload() {
         var loadQueue = new createjs.LoadQueue();

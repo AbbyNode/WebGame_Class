@@ -16,6 +16,7 @@ let game = (function () {
 		{id: "backButton", src: "./Assets/images/backButton.png"},
 
 		{id: "ocean", src: "./Assets/images/ocean.gif"},
+		{id: "plane", src: "./Assets/images/plane.png"}
 	];
 
 	function Preload(): void {
