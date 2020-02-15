@@ -61,6 +61,14 @@ module objects {
 			this.y = newPosition.y;
 		}
 
+		public get velocity() : Vector2 {
+			return this._velocity;
+		}
+		
+		public set velocity(v : Vector2) {
+			this._velocity = v;
+		}
+
 		get isCentered(): boolean {
 			return this._isCentered;
 		}

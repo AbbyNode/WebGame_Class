@@ -12,25 +12,36 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-var object;
-(function (object) {
+var objects;
+(function (objects) {
     var Ocean = /** @class */ (function (_super) {
         __extends(Ocean, _super);
         function Ocean() {
-            return _super.call(this, "./Assets/images/ocean.gif") || this;
+            var _this = _super.call(this, "./Assets/images/ocean.gif") || this;
+            _this.Start();
+            return _this;
         }
         Ocean.prototype._checkBounds = function () {
+            if (this.position.y >= 0) {
+                this.Reset();
+            }
         };
         Ocean.prototype._move = function () {
+            this.position = objects.Vector2.add(this.position, this.velocity);
         };
         Ocean.prototype.Start = function () {
+            this._verticalSpeed = 5;
+            this.velocity = new objects.Vector2(0, 0);
         };
         Ocean.prototype.Update = function () {
+            this._move();
+            this._checkBounds();
         };
         Ocean.prototype.Reset = function () {
+            this.position.y = -960;
         };
         return Ocean;
     }(objects.GameObject));
-    object.Ocean = Ocean;
-})(object || (object = {}));
+    objects.Ocean = Ocean;
+})(objects || (objects = {}));
 //# sourceMappingURL=Ocean.js.map
