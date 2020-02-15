@@ -1,7 +1,5 @@
-module objects 
-{
-    export class Label extends createjs.Text
-    {
+module objects {
+	export class Label extends createjs.Text {
         /**
          * Creates an instance of Label.
          * @param {string} labelString
@@ -13,23 +11,21 @@ module objects
          * @param {boolean} isCentered
          * @memberof Label
          */
-        constructor(
-            labelString:string = "unknown label", 
-            fontSize:string = "20px", 
-            fontFamily:string = "Consolas", 
-            fontColour:string = "#000000", 
-            x:number = 0, y:number = 0, isCentered:boolean = false)
-        {
-            super(labelString, fontSize + " " + fontFamily, fontColour);
+		constructor(
+			labelString: string = "unknown label",
+			fontSize: string = "20px",
+			fontFamily: string = "Consolas",
+			fontColour: string = "#000000",
+			x: number = 0, y: number = 0, isCentered: boolean = false) {
+			super(labelString, fontSize + " " + fontFamily, fontColour);
 
-            if(isCentered)
-            {
-                this.regX = this.getBounds().width * 0.5;
-                this.regY = this.getMeasuredLineHeight() * 0.5;
-            }
+			if (isCentered) {
+				this.regX = this.getBounds().width * 0.5;
+				this.regY = this.getMeasuredLineHeight() * 0.5;
+			}
 
-            this.x = x;
-            this.y = y;
-        }
-    }
+			this.x = x;
+			this.y = y;
+		}
+	}
 }
