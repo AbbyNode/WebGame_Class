@@ -31,7 +31,8 @@ var objects;
         };
         Ocean.prototype.Start = function () {
             this._verticalSpeed = 5;
-            this.velocity = new objects.Vector2(0, 0);
+            this.velocity = new objects.Vector2(0, this._verticalSpeed);
+            this.Reset();
         };
         Ocean.prototype.Update = function () {
             this._move();

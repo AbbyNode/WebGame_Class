@@ -34,8 +34,10 @@ var scenes;
             this.Main();
         };
         Start.prototype.Update = function () {
+            this._ocean.Update();
         };
         Start.prototype.Main = function () {
+            this.addChild(this._ocean);
             this.addChild(this._startLabel);
             this.addChild(this._startButton);
             this._startButton.on("click", function () {

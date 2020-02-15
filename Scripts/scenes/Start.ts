@@ -34,6 +34,8 @@ module scenes {
 
 		public Main(): void {
 
+			this.addChild(this._ocean);
+
 			this.addChild(this._startLabel);
 
 			this.addChild(this._startButton);

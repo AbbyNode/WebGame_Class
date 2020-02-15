@@ -20,7 +20,8 @@ module objects {
 
 		public Start(): void {
 			this._verticalSpeed = 5;
-			this.velocity = new Vector2(0, 0);
+			this.velocity = new Vector2(0, this._verticalSpeed);
+			this.Reset();
 		}
 
 		public Update(): void {
