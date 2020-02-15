@@ -1,8 +1,10 @@
 module scenes {
 	export class Play extends objects.Scene {
 		// PRIVATE INSTANCE MEMBERS
-		playLabel: objects.Label;
-		nextButton: objects.Button;
+		private _playLabel: objects.Label;
+		private _nextButton: objects.Button;
+
+		private _ocean:objects.Ocean;
 
 		// PUBLIC PROPERTIES
 
@@ -11,8 +13,10 @@ module scenes {
 			super();
 
 			// initialization
-			this.playLabel = new objects.Label();
-			this.nextButton = new objects.Button();
+			this._playLabel = new objects.Label();
+			this._nextButton = new objects.Button();
+
+			this._ocean = new objects.Ocean();
 
 			this.Start();
 		}
@@ -20,23 +24,24 @@ module scenes {
 		// PUBLIC METHODS
 
 		public Start(): void {
-			this.playLabel = new objects.Label("Place Scene", "80px", "Consolas", "#000000", 320, 200, true);
-			this.nextButton = new objects.Button("./Assets/images/nextButton.png", 320, 400, true);
+			this._playLabel = new objects.Label("Place Scene", "80px", "Consolas", "#ffff00", 320, 200, true);
+			this._nextButton = new objects.Button(config.Game.ASSETS.getResult("nextButton"), 320, 400, true);
 
 			this.Main();
 		}
 
 		public Update(): void {
-
+			this._ocean.Update();
 		}
 
 		public Main(): void {
+			this.addChild(this._ocean);
 
-			this.addChild(this.playLabel);
+			this.addChild(this._playLabel);
 
-			this.addChild(this.nextButton);
+			this.addChild(this._nextButton);
 
-			this.nextButton.on("click", function () {
+			this._nextButton.on("click", function () {
 				config.Game.SCENE_STATE = scenes.State.END;
 			});
 		}

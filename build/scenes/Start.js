@@ -29,8 +29,8 @@ var scenes;
         }
         // PUBLIC METHODS
         Start.prototype.Start = function () {
-            this._startLabel = new objects.Label("The Game", "80px", "Consolas", "#000000", 320, 200, true);
-            this._startButton = new objects.Button("./Assets/images/startButton.png", 320, 400, true);
+            this._startLabel = new objects.Label("The Game", "80px", "Consolas", "#ffff00", 320, 200, true);
+            this._startButton = new objects.Button(config.Game.ASSETS.getResult("startButton"), 320, 400, true);
             this.Main();
         };
         Start.prototype.Update = function () {

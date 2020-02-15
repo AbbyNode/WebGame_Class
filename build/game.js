@@ -7,8 +7,11 @@ var game = (function () {
     var currentSceneState;
     var currentScene;
     var assetManifest = [
-        { id: "startButton", src: "./Assets/images/startButton.png" },
         { id: "placeholder", src: "./Assets/images/placeholder.png" },
+        { id: "startButton", src: "./Assets/images/startButton.png" },
+        { id: "exitButton", src: "./Assets/images/exitButton.png" },
+        { id: "nextButton", src: "./Assets/images/nextButton.png" },
+        { id: "backButton", src: "./Assets/images/backButton.png" },
         { id: "ocean", src: "./Assets/images/ocean.gif" },
     ];
     function Preload() {
