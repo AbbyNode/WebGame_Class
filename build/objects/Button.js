@@ -16,36 +16,39 @@ var objects;
 (function (objects) {
     var Button = /** @class */ (function (_super) {
         __extends(Button, _super);
-        function Button(imgPath, x, y, isCentered) {
-            if (imgPath === void 0) { imgPath = "./Assets/images/default.png"; }
+        // constructor
+        function Button(imagePath, x, y, isCentered) {
+            if (imagePath === void 0) { imagePath = "./Assets/images/placeholder.png"; }
             if (x === void 0) { x = 0; }
             if (y === void 0) { y = 0; }
             if (isCentered === void 0) { isCentered = true; }
-            var _this = _super.call(this, imgPath, x, y, isCentered) || this;
-            _this.on("mouseover", _this.mouseover);
-            _this.on("mouseout", _this.mouseout);
+            var _this = _super.call(this, imagePath, x, y, isCentered) || this;
+            _this.on("mouseover", _this.HoverOver);
+            _this.on("mouseout", _this.HoverOut);
+            _this.Start();
             return _this;
         }
-        // method
-        Button.prototype.mouseover = function () {
+        // PRIVATE LIFE CYCLE METHODS
+        Button.prototype._checkBounds = function () {
+        };
+        // PUBLIC Methods
+        Button.prototype.HoverOver = function () {
             this.alpha = 0.7;
         };
-        Button.prototype.mouseout = function () {
-            this.alpha = 1;
+        Button.prototype.HoverOut = function () {
+            this.alpha = 1.0;
         };
-        // PROTECTED METHODS
-        Button.prototype._checkBounds = function () {
-            // throw new Error("Method not implemented.");
+        // PUBLIC LIFE CYCLE METHODS
+        /**
+         * Initialization happens here
+         *
+         * @memberof Button
+         */
+        Button.prototype.Start = function () {
         };
-        // PUBLIC METHODS
-        Button.prototype.start = function () {
-            // throw new Error("Method not implemented.");
+        Button.prototype.Update = function () {
         };
-        Button.prototype.update = function () {
-            // throw new Error("Method not implemented.");
-        };
-        Button.prototype.reset = function () {
-            // throw new Error("Method not implemented.");
+        Button.prototype.Reset = function () {
         };
         return Button;
     }(objects.GameObject));

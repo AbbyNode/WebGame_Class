@@ -1,43 +1,52 @@
 module managers {
-    export class Collision {
-        public static squaredRadiusCheck(gObj1: objects.GameObject, gObj2: objects.GameObject): void {
-            let sqrDistance = objects.Vector2.sqrDistance(gObj1.position, gObj2.position);
-            let radii = gObj1.halfWidth + gObj2.halfWidth;
+	export class Collision {
+		public static squaredRadiusCheck(object1: objects.GameObject, object2: objects.GameObject) {
+			let sqrDistance = objects.Vector2.sqrDistance(object1.position, object2.position);
+			let radii = object1.halfWidth + object2.halfWidth
 
-            if (sqrDistance <= (radii * radii)) {
-                if (!gObj2.isColliding) {
-                    console.log("Collision square radius");
-                    gObj2.isColliding = true;
-                }
-            } else {
-                gObj2.isColliding = false;
-            }
-        }
+			if (sqrDistance < (radii * radii)) {
+				if (!object2.isColliding) {
+					console.log("Collision!");
+					object2.isColliding = true;
+				}
 
-        public static AABBCheck(gObj1: objects.GameObject, gObj2: objects.GameObject) {
-            let gObj1Offset:objects.Vector2 = new objects.Vector2(0, 0);
-            let gObj2Offset:objects.Vector2 = new objects.Vector2(0, 0);
+			}
+			else {
+				object2.isColliding = false;
+			}
+		}
 
-            if (gObj1.isCentered) {
-                gObj1Offset.x = gObj1.halfWidth;
-                gObj1Offset.y = gObj1.halfHeight;
-            }
-            if (gObj2.isCentered) {
-                gObj1Offset.x = gObj2.halfWidth;
-                gObj1Offset.y = gObj2.halfHeight;
-            }
+		public static AABBCheck(object1: objects.GameObject, object2: objects.GameObject) {
+			let object1Offset = new objects.Vector2(0, 0);
+			let object2Offset = new objects.Vector2(0, 0);
 
-            let gObj1TopLeft = objects.Vector2.subtract(gObj1.position, gObj1Offset);
-            let gObj2TopLeft = objects.Vector2.subtract(gObj2.position, gObj2Offset);
+			if (object1.isCentered) {
+				object1Offset.x = object1.halfWidth;
+				object1Offset.y = object1.halfHeight;
+			}
 
-            if (gObj1TopLeft.x < gObj2TopLeft.x + gObj2.width &&
-                gObj1TopLeft.x + gObj1.width > gObj2TopLeft.x &&
-                gObj1TopLeft.y < gObj2TopLeft.y + gObj2.height &&
-                gObj1TopLeft.y + gObj1.height > gObj2TopLeft.y) {
-                console.log("Collision AABB");
-            }
-        }
-    }
+			if (object2.isCentered) {
+				object2Offset.x = object2.halfWidth;
+				object2Offset.y = object2.halfHeight;
+			}
+
+			let object1TopLeft = objects.Vector2.subtract(object1.position, object1Offset);
+			let object2TopLeft = objects.Vector2.subtract(object2.position, object2Offset);
+
+			if (object1TopLeft.x < object2TopLeft.x + object2.width &&
+				object1TopLeft.x + object1.width > object2TopLeft.x &&
+				object1TopLeft.y < object2TopLeft.y + object2.height &&
+				object1TopLeft.y + object1.height > object2TopLeft.y) {
+				if (!object2.isColliding) {
+					console.log("Collision!");
+					object2.isColliding = true;
+				}
+			}
+			else {
+				object2.isColliding = false;
+			}
+		}
+
+
+	}
 }
-
-// https://tutorialedge.net/gamedev/aabb-collision-detection-tutorial/

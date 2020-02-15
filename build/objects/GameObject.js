@@ -19,17 +19,17 @@ var objects;
         // CONSTRUCTOR
         /**
          * Creates an instance of GameObject.
-         * @param {string} [imagePath="./Assets/images/default.png"]
+         * @param {string} [imagePath="./Assets/images/placeholder.png"]
          * @param {number} [x=0]
          * @param {number} [y=0]
-         * @param {boolean} [isCentered=false]
+         * @param {boolean} [centered=false]
          * @memberof GameObject
          */
-        function GameObject(imagePath, x, y, isCentered) {
-            if (imagePath === void 0) { imagePath = "./Assets/images/default.png"; }
+        function GameObject(imagePath, x, y, centered) {
+            if (imagePath === void 0) { imagePath = "./Assets/images/placeholder.png"; }
             if (x === void 0) { x = 0; }
             if (y === void 0) { y = 0; }
-            if (isCentered === void 0) { isCentered = false; }
+            if (centered === void 0) { centered = false; }
             var _this = _super.call(this, imagePath) || this;
             // MEMBER VARIABLES
             _this._width = 0;
@@ -37,14 +37,21 @@ var objects;
             _this._halfWidth = 0;
             _this._halfHeight = 0;
             _this._isColliding = false;
-            _this._position = new objects.Vector2(0, 0);
             _this._isCentered = false;
-            _this.image.addEventListener("load", function () {
-                _this.position = new objects.Vector2(x, y);
+            _this._position = new objects.Vector2(0, 0);
+            _this._velocity = new objects.Vector2(0, 0);
+            _this.isColliding = false;
+            //this.position = new Vector2(x, y);
+            // wait for the  image to load before calculating its width and height
+            _this.image.addEventListener('load', function () {
                 _this.width = _this.getBounds().width;
                 _this.height = _this.getBounds().height;
-                _this.isCentered = isCentered;
+                _this.halfWidth = _this.width * 0.5;
+                _this.halfHeight = _this.height * 0.5;
+                _this.isCentered = centered;
             });
+            // set the GameObject's position
+            _this.position = new objects.Vector2(x, y);
             return _this;
         }
         Object.defineProperty(GameObject.prototype, "width", {
@@ -52,9 +59,8 @@ var objects;
             get: function () {
                 return this._width;
             },
-            set: function (width) {
-                this._width = width;
-                this._halfWidth = width / 2;
+            set: function (newWidth) {
+                this._width = newWidth;
             },
             enumerable: true,
             configurable: true
@@ -63,9 +69,8 @@ var objects;
             get: function () {
                 return this._height;
             },
-            set: function (height) {
-                this._height = height;
-                this._halfHeight = height / 2;
+            set: function (newHeight) {
+                this._height = newHeight;
             },
             enumerable: true,
             configurable: true
@@ -74,12 +79,18 @@ var objects;
             get: function () {
                 return this._halfWidth;
             },
+            set: function (newHalfWidth) {
+                this._halfWidth = newHalfWidth;
+            },
             enumerable: true,
             configurable: true
         });
         Object.defineProperty(GameObject.prototype, "halfHeight", {
             get: function () {
                 return this._halfHeight;
+            },
+            set: function (newHalfHeight) {
+                this._halfHeight = newHalfHeight;
             },
             enumerable: true,
             configurable: true
@@ -88,8 +99,8 @@ var objects;
             get: function () {
                 return this._isColliding;
             },
-            set: function (isColliding) {
-                this._isColliding = isColliding;
+            set: function (newState) {
+                this._isColliding = newState;
             },
             enumerable: true,
             configurable: true
@@ -98,10 +109,20 @@ var objects;
             get: function () {
                 return this._position;
             },
-            set: function (position) {
-                this._position = position;
-                this.x = position.x;
-                this.y = position.y;
+            set: function (newPosition) {
+                this._position = newPosition;
+                this.x = newPosition.x;
+                this.y = newPosition.y;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(GameObject.prototype, "velocity", {
+            get: function () {
+                return this._velocity;
+            },
+            set: function (v) {
+                this._velocity = v;
             },
             enumerable: true,
             configurable: true
@@ -110,11 +131,12 @@ var objects;
             get: function () {
                 return this._isCentered;
             },
-            set: function (isCentered) {
-                this._isCentered = isCentered;
-                if (isCentered) {
-                    this.regX = this._halfWidth;
-                    this.regY = this._halfHeight;
+            set: function (newState) {
+                this._isCentered = newState;
+                if (newState) {
+                    // set the anchor point to the center
+                    this.regX = this.halfWidth;
+                    this.regY = this.halfHeight;
                 }
                 else {
                     this.regX = 0;

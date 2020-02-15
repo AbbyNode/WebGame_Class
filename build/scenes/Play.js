@@ -16,31 +16,30 @@ var scenes;
 (function (scenes) {
     var Play = /** @class */ (function (_super) {
         __extends(Play, _super);
+        // PUBLIC PROPERTIES
+        // CONSTRUCTOR
         function Play() {
             var _this = _super.call(this) || this;
-            // this.startLabel = new objects.Label();
-            // this.startButton = new objects.Button();
-            _this.player = new objects.Player();
+            // initialization
+            _this.playLabel = new objects.Label();
+            _this.nextButton = new objects.Button();
+            _this.Start();
             return _this;
         }
+        // PUBLIC METHODS
         Play.prototype.Start = function () {
-            // this.startLabel = new objects.Label("The Game", "40px", "Consolas", "#000000", 320, 240, true);
-            // this.startButton = new objects.Button("./Assets/images/startButton.png", 350, 300, true);
-            this.player = new objects.Player();
+            this.playLabel = new objects.Label("Place Scene", "80px", "Consolas", "#000000", 320, 200, true);
+            this.nextButton = new objects.Button("./Assets/images/nextButton.png", 320, 400, true);
             this.Main();
         };
         Play.prototype.Update = function () {
-            this.player.update();
-            // managers.Collision.squaredRadiusCheck(player, startButton);
-            // managers.Collision.AABBCheck(this.player, this.startButton);
         };
         Play.prototype.Main = function () {
-            // this.addChild(this.startLabel);
-            // this.addChild(this.startButton);
-            // this.startButton.on("click", function () {
-            //     config.Game.SCENE_STATE = scenes.State.PLAY;
-            // });
-            this.addChild(this.player);
+            this.addChild(this.playLabel);
+            this.addChild(this.nextButton);
+            this.nextButton.on("click", function () {
+                config.Game.SCENE_STATE = scenes.State.END;
+            });
         };
         return Play;
     }(objects.Scene));

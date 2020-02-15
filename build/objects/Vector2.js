@@ -6,7 +6,7 @@ var objects;
         function Vector2(x, y) {
             if (x === void 0) { x = 0; }
             if (y === void 0) { y = 0; }
-            // PRIVATE INSTANCE
+            // PRIVATE INSTANCE MEMBERS
             this._x = 0;
             this._y = 0;
             this._magnitude = 0;
@@ -17,12 +17,12 @@ var objects;
             this.magnitude = Math.sqrt(this.sqrMagnitude);
         }
         Object.defineProperty(Vector2.prototype, "x", {
-            // PUBLIC PROP
+            // PUBLIC PROPERTIES
             get: function () {
                 return this._x;
             },
-            set: function (x) {
-                this._x = x;
+            set: function (newX) {
+                this._x = newX;
             },
             enumerable: true,
             configurable: true
@@ -31,8 +31,8 @@ var objects;
             get: function () {
                 return this._y;
             },
-            set: function (y) {
-                this._y = y;
+            set: function (newY) {
+                this._y = newY;
             },
             enumerable: true,
             configurable: true
@@ -41,8 +41,8 @@ var objects;
             get: function () {
                 return this._magnitude;
             },
-            set: function (magnitude) {
-                this._magnitude = magnitude;
+            set: function (newMagnitude) {
+                this._magnitude = newMagnitude;
             },
             enumerable: true,
             configurable: true
@@ -51,8 +51,8 @@ var objects;
             get: function () {
                 return this._sqrMagnitude;
             },
-            set: function (sqrMagnitude) {
-                this._sqrMagnitude = sqrMagnitude;
+            set: function (newSQRMagnitude) {
+                this._sqrMagnitude = newSQRMagnitude;
             },
             enumerable: true,
             configurable: true
@@ -68,35 +68,17 @@ var objects;
         });
         // PRIVATE METHODS
         // PUBLIC METHODS
-        Vector2.prototype.add = function (addVector) {
-            this.x += addVector.x;
-            this.y += addVector.y;
+        Vector2.prototype.add = function (rhs) {
+            this.x += rhs.x;
+            this.y += rhs.y;
         };
-        Vector2.prototype.subtract = function (subtractVector) {
-            this.x -= subtractVector.x;
-            this.y -= subtractVector.y;
+        Vector2.prototype.subtract = function (rhs) {
+            this.x -= rhs.x;
+            this.y -= rhs.y;
         };
         Vector2.prototype.scale = function (scalar) {
             this.x *= scalar;
             this.y *= scalar;
-        };
-        Vector2.zero = function () {
-            return new Vector2(0, 0);
-        };
-        Vector2.one = function () {
-            return new Vector2(1, 1);
-        };
-        Vector2.up = function () {
-            return new Vector2(0, 1);
-        };
-        Vector2.down = function () {
-            return new Vector2(0, -1);
-        };
-        Vector2.right = function () {
-            return new Vector2(1, 0);
-        };
-        Vector2.left = function () {
-            return new Vector2(-1, 0);
         };
         Vector2.prototype.normalize = function () {
             var magnitude = this.magnitude;
@@ -105,43 +87,67 @@ var objects;
                 this.y = this.y / magnitude;
             }
             else {
-                return Vector2.zero();
+                this.x = 0;
+                this.y = 0;
             }
+        };
+        // PUBLIC STATIC METHODS
+        Vector2.zero = function () {
+            return new Vector2(0, 0);
+        };
+        Vector2.one = function () {
+            return new Vector2(1, 1);
+        };
+        Vector2.up = function () {
+            return new Vector2(0, -1);
+        };
+        Vector2.down = function () {
+            return new Vector2(0, 1);
+        };
+        Vector2.left = function () {
+            return new Vector2(-1, 0);
+        };
+        Vector2.right = function () {
+            return new Vector2(1, 0);
         };
         Vector2.dot = function (lhs, rhs) {
             return lhs.x * rhs.x + lhs.y * rhs.y;
         };
         /**
-         * Returns distance between p1 and p2
+         * Returns the Pythogorean Distance between P1 and P2
          *
          * @static
-         * @param {Vector2} p1
-         * @param {Vector2} p2
+         * @param {Vector2} P1
+         * @param {Vector2} P2
          * @returns {number}
-         * @memberof Vector2
          */
-        Vector2.distance = function (p1, p2) {
-            return Math.sqrt(this.sqrDistance(p1, p2));
-            // let xDiff = (p2.x - p1.x);
-            // let yDiff = (p2.y - p1.y);
-            // return Math.sqrt(xDiff * xDiff + yDiff * yDiff);
+        Vector2.distance = function (P1, P2) {
+            var Xs = (P2.x - P1.x);
+            var Ys = (P2.y - P1.y);
+            return Math.sqrt(Xs * Xs + Ys * Ys);
         };
         /**
-         * Return square distance between p1 and p2
+         * Returns the squared distance between P1 and P2
          *
          * @static
-         * @param {Vector2} p1
-         * @param {Vector2} p2
+         * @param {Vector2} P1
+         * @param {Vector2} P2
          * @returns {number}
-         * @memberof Vector2
          */
-        Vector2.sqrDistance = function (p1, p2) {
-            var xDiff = (p2.x - p1.x);
-            var yDiff = (p2.y - p1.y);
-            return xDiff * xDiff + yDiff * yDiff;
+        Vector2.sqrDistance = function (P1, P2) {
+            var Xs = (P2.x - P1.x);
+            var Ys = (P2.y - P1.y);
+            return Xs * Xs + Ys * Ys;
+        };
+        Vector2.add = function (lhs, rhs) {
+            var dx = lhs.x + rhs.x;
+            var dy = lhs.y + rhs.y;
+            return new Vector2(dx, dy);
         };
         Vector2.subtract = function (lhs, rhs) {
-            return new Vector2(lhs.x - rhs.x, lhs.y - rhs.y);
+            var dx = lhs.x - rhs.x;
+            var dy = lhs.y - rhs.y;
+            return new Vector2(dx, dy);
         };
         return Vector2;
     }());

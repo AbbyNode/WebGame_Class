@@ -1,34 +1,35 @@
 module objects {
-    export abstract class Scene extends createjs.Container {
-        
-        private _state : scenes.State = scenes.State.NO_SCENE;
-        public get state() : scenes.State {
-            return this._state;
-        }
-        public set state(v : scenes.State) {
-            this._state = v;
-        }
-        
-        constructor() {
-            super();
+	export abstract class Scene extends createjs.Container {
+		constructor() {
+			super();
 
-            this.Start();
-        }
+			//this.Start();
+		}
+
+		// Life Cycle Functions
 
         /**
-         * Initialization method
+         * Initialization Method
          *
          * @abstract
          * @memberof Scene
          */
-        public abstract Start():void;
+		public abstract Start(): void;
 
         /**
-         * Update method
+         * Updates all game objects attached to the Scene
          *
          * @abstract
          * @memberof Scene
          */
-        public abstract Update():void;
-    }
+		public abstract Update(): void;
+
+        /**
+         * Scene functionality happens in this method
+         *
+         * @abstract
+         * @memberof Scene
+         */
+		public abstract Main(): void;
+	}
 }

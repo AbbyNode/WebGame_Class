@@ -17,21 +17,9 @@ var objects;
     var Scene = /** @class */ (function (_super) {
         __extends(Scene, _super);
         function Scene() {
-            var _this = _super.call(this) || this;
-            _this._state = scenes.State.NO_SCENE;
-            _this.Start();
-            return _this;
+            return _super.call(this) || this;
+            //this.Start();
         }
-        Object.defineProperty(Scene.prototype, "state", {
-            get: function () {
-                return this._state;
-            },
-            set: function (v) {
-                this._state = v;
-            },
-            enumerable: true,
-            configurable: true
-        });
         return Scene;
     }(createjs.Container));
     objects.Scene = Scene;

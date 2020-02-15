@@ -16,32 +16,33 @@ var scenes;
 (function (scenes) {
     var Start = /** @class */ (function (_super) {
         __extends(Start, _super);
-        // player:objects.Player;
+        // PUBLIC PROPERTIES
+        // CONSTRUCTOR
         function Start() {
             var _this = _super.call(this) || this;
-            _this.startLabel = new objects.Label();
-            _this.startButton = new objects.Button();
+            // initialization
+            _this._startLabel = new objects.Label();
+            _this._startButton = new objects.Button();
+            _this._ocean = new objects.Ocean();
+            _this.Start();
             return _this;
-            // this.player = new objects.Player();
         }
+        // PUBLIC METHODS
         Start.prototype.Start = function () {
-            this.startLabel = new objects.Label("The Game", "40px", "Consolas", "#000000", 320, 240, true);
-            this.startButton = new objects.Button("./Assets/images/startButton.png", 350, 300, true);
-            // this.player = new objects.Player();
+            this._startLabel = new objects.Label("The Game", "80px", "Consolas", "#000000", 320, 200, true);
+            this._startButton = new objects.Button("./Assets/images/startButton.png", 320, 400, true);
             this.Main();
         };
         Start.prototype.Update = function () {
-            // this.player.update();
-            // managers.Collision.squaredRadiusCheck(player, startButton);
-            // managers.Collision.AABBCheck(this.player, this.startButton);
+            this._ocean.Update();
         };
         Start.prototype.Main = function () {
-            this.addChild(this.startLabel);
-            this.addChild(this.startButton);
-            this.startButton.on("click", function () {
+            this.addChild(this._ocean);
+            this.addChild(this._startLabel);
+            this.addChild(this._startButton);
+            this._startButton.on("click", function () {
                 config.Game.SCENE_STATE = scenes.State.PLAY;
             });
-            // this.addChild(this.player);
         };
         return Start;
     }(objects.Scene));

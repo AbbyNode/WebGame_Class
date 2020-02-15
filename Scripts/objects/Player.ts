@@ -1,27 +1,35 @@
 module objects {
-    export class Player extends GameObject {
-        constructor() {
-            // super();
-            super("./Assets/images/default.png", 0, 0, true);
-        }
+	export class Player extends GameObject {
+		// PRIVATE INSTANCE MEMBERS
 
-        protected _checkBounds(): void {
-            // throw new Error("Method not implemented.");
-        }
-        public start(): void {
-            // throw new Error("Method not implemented.");
-            // this.isCentered = true;
-        }
-        public update(): void {
-            let stage = config.Game.STAGE;
-            this.position = new Vector2(stage.mouseX, stage.mouseY);
+		// PUBLIC PROPERTIES
 
-            // TODO: Check Tom's GitHub for mouse fix
-            // https://github.com/CentennialCollege/COMP397-W2020-Lesson5B
+		// CONSTRUCTOR
+		constructor() {
+			super("./Assets/images/placeholder.png", 0, 0, true);
 
-        }
-        public reset(): void {
-            // throw new Error("Method not implemented.");
-        }
-    }
+			this.Start();
+		}
+
+		// PRIVATE METHODS
+		protected _checkBounds(): void {
+
+		}
+
+		// PUBLIC METHODS
+		public Start(): void {
+
+		}
+
+		public Update(): void {
+			let mouseX = config.Game.STAGE.mouseX;
+			let mouseY = config.Game.STAGE.mouseY;
+
+			this.position = new Vector2(mouseX, mouseY);
+		}
+
+		public Reset(): void {
+
+		}
+	}
 }

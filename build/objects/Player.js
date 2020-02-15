@@ -16,25 +16,26 @@ var objects;
 (function (objects) {
     var Player = /** @class */ (function (_super) {
         __extends(Player, _super);
+        // PRIVATE INSTANCE MEMBERS
+        // PUBLIC PROPERTIES
+        // CONSTRUCTOR
         function Player() {
-            // super();
-            return _super.call(this, "./Assets/images/default.png", 0, 0, true) || this;
+            var _this = _super.call(this, "./Assets/images/placeholder.png", 0, 0, true) || this;
+            _this.Start();
+            return _this;
         }
+        // PRIVATE METHODS
         Player.prototype._checkBounds = function () {
-            // throw new Error("Method not implemented.");
         };
-        Player.prototype.start = function () {
-            // throw new Error("Method not implemented.");
-            // this.isCentered = true;
+        // PUBLIC METHODS
+        Player.prototype.Start = function () {
         };
-        Player.prototype.update = function () {
-            var stage = config.Game.STAGE;
-            this.position = new objects.Vector2(stage.mouseX, stage.mouseY);
-            // TODO: Check Tom's GitHub for mouse fix
-            // https://github.com/CentennialCollege/COMP397-W2020-Lesson5B
+        Player.prototype.Update = function () {
+            var mouseX = config.Game.STAGE.mouseX;
+            var mouseY = config.Game.STAGE.mouseY;
+            this.position = new objects.Vector2(mouseX, mouseY);
         };
-        Player.prototype.reset = function () {
-            // throw new Error("Method not implemented.");
+        Player.prototype.Reset = function () {
         };
         return Player;
     }(objects.GameObject));
