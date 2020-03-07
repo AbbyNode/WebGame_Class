@@ -1,51 +1,56 @@
-module scenes {
-	export class Start extends objects.Scene {
-		// PRIVATE INSTANCE MEMBERS
-		private _startLabel: objects.Label;
-		private _startButton: objects.Button;
+module scenes
+{
+    export class Start extends objects.Scene
+    {
+        // PRIVATE INSTANCE MEMBERS
+        private _welcomeLabel: objects.Label;
+        private _startButton: objects.Button;
+        private _ocean: objects.Ocean;
 
-		private _ocean:objects.Ocean;
+        // PUBLIC PROPERTIES
 
-		// PUBLIC PROPERTIES
+        // CONSTRUCTOR
+        constructor()
+        {
+            super();
 
-		// CONSTRUCTOR
-		constructor() {
-			super();
+            this.Start();
+        }
 
-			// initialization
-			this._startLabel = new objects.Label();
-			this._startButton = new objects.Button();
+        // PRIVATE METHODS
 
-			this._ocean = new objects.Ocean();
+        // PUBLIC METHODS
+        public Start(): void 
+        {
+             //instantiate a new Text object
+            this._welcomeLabel = new objects.Label("The Game", "80px", "Consolas", "#FFFF00", 320, 180, true);
+            // buttons
+             this._startButton = new objects.Button(config.Game.ASSETS.getResult("startButton"), 320, 430, true);
 
-			this.Start();
-		}
+             this._ocean = new objects.Ocean();
+            this.Main();
+        }        
+        
+        public Update(): void 
+        {
+           this._ocean.Update();
+        }
+        
+        public Main(): void 
+        {
+            this.addChild(this._ocean);
+       
+            this.addChild(this._welcomeLabel);
 
-		// PUBLIC METHODS
+        
+            this.addChild(this._startButton);
 
-		public Start(): void {
-			this._startLabel = new objects.Label("The Game", "80px", "Consolas", "#ffff00", 320, 200, true);
-			this._startButton = new objects.Button(config.Game.ASSETS.getResult("startButton"), 320, 400, true);
+            this._startButton.on("click", ()=>{
+                config.Game.SCENE = scenes.State.PLAY;
+            });
 
-			this.Main();
-		}
+        }
 
-		public Update(): void {
-			this._ocean.Update();
-		}
-
-		public Main(): void {
-			this.addChild(this._ocean);
-
-			this.addChild(this._startLabel);
-
-			this.addChild(this._startButton);
-
-			this._startButton.on("click", function () {
-				config.Game.SCENE_STATE = scenes.State.PLAY;
-			});
-		}
-
-
-	}
+        
+    }
 }

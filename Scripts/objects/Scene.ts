@@ -1,35 +1,45 @@
-module objects {
-	export abstract class Scene extends createjs.Container {
-		constructor() {
-			super();
+module objects
+{
+    export abstract class Scene extends createjs.Container
+    {
+        // PRIVATE INSTANCE MEMBERS
 
-			//this.Start();
-		}
+        // PUBLIC PROPERTIS
 
-		// Life Cycle Functions
+        // CONSTRUCTOR
+        constructor()
+        {
+            super();
+        }
+
+        // PRIVATE METHODS
+
+        // PUBLIC METHODS
+
+        // Life Cycle Methods
 
         /**
-         * Initialization Method
+         * This method is used for Initialization
          *
          * @abstract
          * @memberof Scene
          */
-		public abstract Start(): void;
+        public abstract Start():void;
 
         /**
-         * Updates all game objects attached to the Scene
+         * This method is used to update all child objects in the scene
          *
          * @abstract
          * @memberof Scene
          */
-		public abstract Update(): void;
+        public abstract Update():void;
 
         /**
-         * Scene functionality happens in this method
+         * This method is where all the work happens for the scene
          *
          * @abstract
          * @memberof Scene
          */
-		public abstract Main(): void;
-	}
+        public abstract Main():void;
+    }
 }

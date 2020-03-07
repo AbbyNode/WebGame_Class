@@ -1,131 +1,150 @@
-module objects {
-	export abstract class GameObject extends createjs.Bitmap {
-		// MEMBER VARIABLES
-		private _width: number = 0;
-		private _height: number = 0;
-		private _halfWidth: number = 0;
-		private _halfHeight: number = 0;
-		private _isColliding: boolean = false;
-		private _isCentered: boolean = false;
-		private _position: Vector2 = new Vector2(0, 0);
-		private _velocity: Vector2 = new Vector2(0, 0);
+module objects
+{
+    export abstract class GameObject extends createjs.Bitmap
+    {
+        // PRIVATE INSTANCE MEMBERS
+        private _width:number;
+        private _height:number;
+        private _halfWidth:number;
+        private _halfHeight:number;
+        private _position:Vector2;
+        private _velocity:Vector2;
+        private _isColliding:boolean;
+        private _isCentered:boolean;
+        
+        // PUBLIC PROPERTIES
+        get width():number
+        {
+            return this._width;
+        }
 
-		// PROPERTIES
-		get width(): number {
-			return this._width;
-		}
+        set width(newWidth:number)
+        {
+            this._width = newWidth;
+            this._halfWidth = this._computeHalfWidth();
+        }
 
-		set width(newWidth: number) {
-			this._width = newWidth;
-		}
+        get height():number
+        {
+            return this._height;
+        }
 
-		get height(): number {
-			return this._height;
-		}
+        set height(newHeight:number)
+        {
+            this._height = newHeight;
+            this._halfHeight = this._computeHalfHeight();
+        }
 
-		set height(newHeight: number) {
-			this._height = newHeight;
-		}
+        get halfWidth():number
+        {
+            return this._halfWidth;
+        }
 
-		get halfWidth(): number {
-			return this._halfWidth;
-		}
+        get halfHeight():number
+        {
+            return this._halfHeight;
+        }
 
-		set halfWidth(newHalfWidth: number) {
-			this._halfWidth = newHalfWidth;
-		}
+        get position():Vector2
+        {
+            return this._position;
+        }
 
-		get halfHeight(): number {
-			return this._halfHeight;
-		}
+        set position(newPosition:Vector2)
+        {
+            this._position = newPosition;
+            this.x = newPosition.x;
+            this.y = newPosition.y;
+        }
 
-		set halfHeight(newHalfHeight: number) {
-			this._halfHeight = newHalfHeight;
-		}
+        get velocity():Vector2
+        {
+            return this._velocity;
+        }
 
-		get isColliding(): boolean {
-			return this._isColliding;
-		}
+        set velocity(newVelocity:Vector2)
+        {
+            this._velocity = newVelocity;
+        }
 
-		set isColliding(newState: boolean) {
-			this._isColliding = newState;
-		}
+        get isColliding():boolean
+        {
+            return this._isColliding;
+        }
 
-		get position(): Vector2 {
-			return this._position;
-		}
+        set isColliding(newState:boolean)
+        {
+            this._isColliding = newState;
+        }
 
-		set position(newPosition: Vector2) {
-			this._position = newPosition;
-			this.x = newPosition.x;
-			this.y = newPosition.y;
-		}
+        get isCentered():boolean
+        {
+            return this._isCentered;
+        }
 
-		public get velocity() : Vector2 {
-			return this._velocity;
-		}
-		
-		public set velocity(v : Vector2) {
-			this._velocity = v;
-		}
+        set isCentered(newState:boolean)
+        {
+            this._isCentered = newState;
+            if(newState)
+            {
+                this._centerGameObject();
+            }
+        }
 
-		get isCentered(): boolean {
-			return this._isCentered;
-		}
 
-		set isCentered(newState: boolean) {
-			this._isCentered = newState;
+        // CONSTRUCTOR
+        constructor(imageString:Object = config.Game.ASSETS.getResult("placeholder"), 
+        x:number = 0, y:number = 0, centered:boolean = false)
+        {
+            super(imageString);
 
-			if (newState) {
-				// set the anchor point to the center
-				this.regX = this.halfWidth;
-				this.regY = this.halfHeight;
-			}
-			else {
-				this.regX = 0;
-				this.regY = 0;
-			}
+            // initialization
+            this._width = 0;
+            this._height = 0;
+            this._halfWidth = 0;
+            this._halfHeight = 0;
+            this._position = new Vector2(0, 0, this);
+            this._velocity = new Vector2(0, 0);
+            this._isColliding = false;
+            this._isCentered = false;
+            
+            this.width = this.getBounds().width;
+            this.height = this.getBounds().height;
 
-		}
+            this.isCentered = centered;
 
-		// CONSTRUCTOR
-        /**
-         * Creates an instance of GameObject.
-         * @param {string} [imagePath="./Assets/images/placeholder.png"]
-         * @param {number} [x=0]
-         * @param {number} [y=0]
-         * @param {boolean} [centered=false]
-         * @memberof GameObject
-         */
-		constructor(imagePath: Object = config.Game.ASSETS.getResult("placeholder"),
-			x: number = 0, y: number = 0, centered: boolean = false) {
-			super(imagePath);
-			this.isColliding = false;
+            this.position = new Vector2(x, y, this);
 
-			//this.position = new Vector2(x, y);
+        }
 
-			// wait for the  image to load before calculating its width and height
-			this.image.addEventListener('load', () => {
-				this.width = this.getBounds().width;
-				this.height = this.getBounds().height;
-				this.halfWidth = this.width * 0.5;
-				this.halfHeight = this.height * 0.5;
+        // PRIVATE METHODS
+        private _computeHalfWidth():number
+        {
+            return this.width * 0.5;
+        }
 
-				this.isCentered = centered;
-			});
+        private _computeHalfHeight():number
+        {
+            return this.height * 0.5;
+        }
 
-			// set the GameObject's position
-			this.position = new Vector2(x, y);
-		}
+        private _centerGameObject():void
+        {
+            this.regX = this.halfWidth;
+            this.regY = this.halfHeight;
+        }
 
-		// PRIVATE METHODS
-		protected abstract _checkBounds(): void;
+        protected abstract _checkBounds():void;
 
-		// PUBLIC METHODS
-		public abstract Start(): void;
 
-		public abstract Update(): void;
+        // PUBLIC METHODS
 
-		public abstract Reset(): void;
-	}
+        public abstract Start():void;
+
+        public abstract Update():void;
+        
+        public abstract Reset():void;
+
+    }
+
 }

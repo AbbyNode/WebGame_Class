@@ -1,94 +1,109 @@
-//IIFE -- Immediately Invoked Function Expression
-// mean? is an anonymous self-executing function
-let game = (function () {
-	let canvas: HTMLCanvasElement = document.getElementsByTagName('canvas')[0];
-	let stage: createjs.Stage;
+//IIFE - Immediately Invoked Function Expression
+//means -> self-executing anonymous function
+let Game = (function(){
 
-	let currentSceneState: scenes.State;
-	let currentScene: objects.Scene;
+    // variable declarations
+    let canvas:HTMLCanvasElement = document.getElementsByTagName('canvas')[0];
+    let stage:createjs.Stage;
+    
+    let currentSceneState:scenes.State;
+    let currentScene: objects.Scene;
 
-	let assetManifest = [
-		{id: "placeholder", src: "./Assets/images/placeholder.png"},
+    let assets: createjs.LoadQueue;
 
-		{id: "startButton", src: "./Assets/images/startButton.png"},
-		{id: "exitButton", src: "./Assets/images/exitButton.png"},
-		{id: "nextButton", src: "./Assets/images/nextButton.png"},
-		{id: "backButton", src: "./Assets/images/backButton.png"},
+    let assetManifest = 
+    [
+        {id:"button", src:"./Assets/images/button.png"},
+        {id:"placeholder", src:"./Assets/images/placeholder.png"},
+        {id:"startButton", src:"./Assets/images/startButton.png"},
+        {id:"nextButton", src:"./Assets/images/nextButton.png"},
+        {id:"backButton", src:"./Assets/images/backButton.png"},
+        {id:"ocean", src:"./Assets/images/ocean.gif"},
+        {id:"plane", src:"./Assets/images/plane.png"}
+    ];
 
-		{id: "ocean", src: "./Assets/images/ocean.gif"},
-		{id: "plane", src: "./Assets/images/plane.png"}
-	];
-
-	function Preload(): void {
-		let loadQueue = new createjs.LoadQueue();
-		loadQueue.installPlugin(createjs.Sound);
-		loadQueue.on("complete", Start);
-		config.Game.ASSETS = loadQueue;
-
-		loadQueue.loadManifest(assetManifest);
-	}
+    function Preload():void
+    {
+        assets = new createjs.LoadQueue(); // asset container
+        config.Game.ASSETS = assets; // make a reference to the assets in the global config
+        assets.installPlugin(createjs.Sound); // supports sound preloading
+        assets.loadManifest(assetManifest);
+        assets.on("complete", Start);
+    }
 
     /**
-     * Perform Initialization in the Start function
+     * This method initializes the CreateJS (EaselJS) Library
+     * It sets the framerate to 60 FPS and sets up the main Game Loop (Update)
+     */
+    function Start():void
+    {
+        console.log(`%c Game Started!`, "color: blue; font-size: 20px; font-weight: bold;");
+        stage = new createjs.Stage(canvas);
+        createjs.Ticker.framerate = config.Game.FPS;
+        createjs.Ticker.on('tick', Update);
+        stage.enableMouseOver(20);
+        
+        currentSceneState = scenes.State.NO_SCENE;
+        config.Game.SCENE = scenes.State.START;
+    }
+
+    /**
+     * This function is triggered every frame (16ms)
+     * The stage is then erased and redrawn 
+     */
+    function Update():void
+    {
+        if(currentSceneState != config.Game.SCENE)
+        {
+            Main();
+        }
+
+        currentScene.Update();
+        
+
+
+        stage.update();
+    }
+
+    /**
+     * This is the main function of the Game (where all the fun happens)
      *
      */
-	function Start(): void {
-		console.log(`%c Game Started`, "color: blue; font-size:20px;");
-		stage = new createjs.Stage(canvas);
-		config.Game.STAGE = stage; // create a reference to the Global Stage
-		createjs.Ticker.framerate = 60; // declare the framerate as 60FPS
-		createjs.Ticker.on('tick', Update);
-		stage.enableMouseOver(20);
+    function Main():void
+    {
+        console.log(`%c Scene Switched...`, "color: green; font-size: 16px;");
 
-		currentSceneState = scenes.State.NO_SCENE;
-		config.Game.SCENE_STATE = scenes.State.START;
-	}
+        // clean up
+        if(currentSceneState != scenes.State.NO_SCENE)
+        {
+            currentScene.removeAllChildren();
+            stage.removeAllChildren();
+        }
 
-    /**
-     * This is the main Game Loop
-     * This function 'triggers' every frame
-     */
-	function Update(): void {
-		if (currentSceneState != config.Game.SCENE_STATE) {
-			Main();
-		}
+        // switch to the new scene
 
-		currentScene.Update();
+        switch(config.Game.SCENE)
+        {
+            case scenes.State.START:
+                console.log("switch to Start Scene");
+                currentScene = new scenes.Start(); 
+                break;
+            case scenes.State.PLAY:
+                console.log("switch to Play Scene");
+                currentScene = new scenes.Play(); 
+                break;
+            case scenes.State.END:
+                console.log("switch to End Scene");
+                currentScene = new scenes.End(); 
+                break;
+        }
 
-		stage.update();
-	}
+        currentSceneState = config.Game.SCENE;
+        stage.addChild(currentScene);
 
-    /**
-     * This function is the main function of the game
-     *
-     */
-	function Main(): void {
-		console.log(`%c Switching Scenes`, "color: green; font-size:16px;");
+    }
 
-		// cleanup
-		if (currentSceneState != scenes.State.NO_SCENE) {
-			currentScene.removeAllChildren();
-			stage.removeAllChildren();
-		}
+    window.addEventListener('load', Preload);
 
-		// state machine
-		switch (config.Game.SCENE_STATE) {
-			case scenes.State.START:
-				currentScene = new scenes.Start();
-				break;
-			case scenes.State.PLAY:
-				currentScene = new scenes.Play();
-				break;
-			case scenes.State.END:
-				currentScene = new scenes.End();
-				break;
 
-		}
-
-		// add the scene to the stage and setup the current scene
-		stage.addChild(currentScene);
-		currentSceneState = config.Game.SCENE_STATE;
-	}
-
-	window.addEventListener("load", Preload);
 })();

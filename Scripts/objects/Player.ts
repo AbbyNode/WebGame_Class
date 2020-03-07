@@ -1,35 +1,39 @@
-module objects {
-	export class Player extends GameObject {
-		// PRIVATE INSTANCE MEMBERS
+module objects
+{
+    export class Player extends GameObject
+    {
+        // PRIVATE INSTANCE MEMBERS
 
-		// PUBLIC PROPERTIES
+        // PUBLIC PROPERTIES
 
-		// CONSTRUCTOR
-		constructor() {
-			super("./Assets/images/placeholder.png", 0, 0, true);
+        // CONSTRUCTOR
+        constructor()
+        {
+            super();
 
-			this.Start();
-		}
+            this.Start();
+        }
 
-		// PRIVATE METHODS
-		protected _checkBounds(): void {
+        // PRIVATE METHODS
+        protected _checkBounds(): void {
+           
+        }
 
-		}
+        // PUBLIC METHODS
 
-		// PUBLIC METHODS
-		public Start(): void {
 
-		}
+        public Start(): void {
+            this.name = "Player";
+        }
 
-		public Update(): void {
-			let mouseX = config.Game.STAGE.mouseX;
-			let mouseY = config.Game.STAGE.mouseY;
+        public Update(): void {
+           this.position = new Vector2(this.stage.mouseX, this.stage.mouseY);
+        }
 
-			this.position = new Vector2(mouseX, mouseY);
-		}
+        public Reset(): void {
+           
+        }
 
-		public Reset(): void {
-
-		}
-	}
+        
+    }
 }

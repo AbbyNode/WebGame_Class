@@ -1,52 +1,51 @@
-module objects {
-	export class Button extends GameObject {
-		// constructor
-		constructor(
-			imagePath: Object = config.Game.ASSETS.getResult("placeholder"),
-			x: number = 0, y: number = 0, isCentered: boolean = true) {
-			super(imagePath, x, y, isCentered);
+module objects
+{
+    export class Button extends GameObject
+    {
+        
+        // constructor
+        constructor(imagePath:Object = config.Game.ASSETS.getResult("button")
+            , x:number = 0, y:number= 0, isCentered:boolean = false)
+        {
+            super(imagePath, x, y, isCentered);
 
-			this.on("mouseover", this.HoverOver);
-			this.on("mouseout", this.HoverOut);
+            this.on("mouseover", this.MouseOver);
+            this.on("mouseout", this.MouseOut);
 
-			this.Start();
-		}
+            this.Start();
+        }
+        
+        // PRIVATE METHODS
+        protected _checkBounds(): void {
+            
+        }
 
-		// PRIVATE LIFE CYCLE METHODS
-		protected _checkBounds(): void {
+        // PUBLIC METHODS
+        MouseOver():void
+        {
+            this.alpha = 0.7;
+        }
 
-		}
-
-
-		// PUBLIC Methods
-		HoverOver(): void {
-			this.alpha = 0.7;
-		}
-
-		HoverOut(): void {
-			this.alpha = 1.0;
-		}
-
-		// PUBLIC LIFE CYCLE METHODS
+        MouseOut():void
+        {
+            this.alpha = 1.0;
+        }
 
         /**
-         * Initialization happens here
+         * This function is used for initialization
          *
          * @memberof Button
          */
-		public Start(): void {
+        public Start(): void {
+            this.name = "Button";
+        }
 
-		}
+        public Update(): void {
+            
+        }
 
-		public Update(): void {
-
-		}
-
-		public Reset(): void {
-
-		}
-
-
-
-	}
+        public Reset(): void {
+            
+        }
+    }
 }
