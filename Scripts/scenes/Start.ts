@@ -3,6 +3,7 @@ module scenes {
 		// PRIVATE INSTANCE MEMBERS
 		private _startLabel: objects.Label;
 		private _startButton: objects.Button;
+
 		private _ocean:objects.Ocean;
 
 		// PUBLIC PROPERTIES
@@ -14,6 +15,7 @@ module scenes {
 			// initialization
 			this._startLabel = new objects.Label();
 			this._startButton = new objects.Button();
+
 			this._ocean = new objects.Ocean();
 
 			this.Start();
@@ -22,8 +24,8 @@ module scenes {
 		// PUBLIC METHODS
 
 		public Start(): void {
-			this._startLabel = new objects.Label("The Game", "80px", "Consolas", "#000000", 320, 200, true);
-			this._startButton = new objects.Button("./Assets/images/startButton.png", 320, 400, true);
+			this._startLabel = new objects.Label("The Game", "80px", "Consolas", "#ffff00", 320, 200, true);
+			this._startButton = new objects.Button(config.Game.ASSETS.getResult("startButton"), 320, 400, true);
 
 			this.Main();
 		}
@@ -33,7 +35,6 @@ module scenes {
 		}
 
 		public Main(): void {
-
 			this.addChild(this._ocean);
 
 			this.addChild(this._startLabel);

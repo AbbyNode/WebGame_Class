@@ -4,6 +4,8 @@ module scenes {
 		endLabel: objects.Label;
 		nextButton: objects.Button;
 
+		private _ocean:objects.Ocean;
+
 		// PUBLIC PROPERTIES
 
 		// CONSTRUCTOR
@@ -14,23 +16,26 @@ module scenes {
 			this.endLabel = new objects.Label();
 			this.nextButton = new objects.Button();
 
+			this._ocean = new objects.Ocean();
+
 			this.Start();
 		}
 
 		// PUBLIC METHODS
 
 		public Start(): void {
-			this.endLabel = new objects.Label("End Scene", "80px", "Consolas", "#000000", 320, 200, true);
-			this.nextButton = new objects.Button("./Assets/images/backButton.png", 320, 400, true);
+			this.endLabel = new objects.Label("End Scene", "80px", "Consolas", "#ffff00", 320, 200, true);
+			this.nextButton = new objects.Button(config.Game.ASSETS.getResult("backButton"), 320, 400, true);
 
 			this.Main();
 		}
 
 		public Update(): void {
-
+			this._ocean.Update();
 		}
 
 		public Main(): void {
+			this.addChild(this._ocean);
 
 			this.addChild(this.endLabel);
 

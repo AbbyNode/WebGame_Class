@@ -7,6 +7,27 @@ let game = (function () {
 	let currentSceneState: scenes.State;
 	let currentScene: objects.Scene;
 
+	let assetManifest = [
+		{id: "placeholder", src: "./Assets/images/placeholder.png"},
+
+		{id: "startButton", src: "./Assets/images/startButton.png"},
+		{id: "exitButton", src: "./Assets/images/exitButton.png"},
+		{id: "nextButton", src: "./Assets/images/nextButton.png"},
+		{id: "backButton", src: "./Assets/images/backButton.png"},
+
+		{id: "ocean", src: "./Assets/images/ocean.gif"},
+		{id: "plane", src: "./Assets/images/plane.png"}
+	];
+
+	function Preload(): void {
+		let loadQueue = new createjs.LoadQueue();
+		loadQueue.installPlugin(createjs.Sound);
+		loadQueue.on("complete", Start);
+		config.Game.ASSETS = loadQueue;
+
+		loadQueue.loadManifest(assetManifest);
+	}
+
     /**
      * Perform Initialization in the Start function
      *
@@ -69,5 +90,5 @@ let game = (function () {
 		currentSceneState = config.Game.SCENE_STATE;
 	}
 
-	window.addEventListener("load", Start);
+	window.addEventListener("load", Preload);
 })();

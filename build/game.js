@@ -6,6 +6,22 @@ var game = (function () {
     var stage;
     var currentSceneState;
     var currentScene;
+    var assetManifest = [
+        { id: "placeholder", src: "./Assets/images/placeholder.png" },
+        { id: "startButton", src: "./Assets/images/startButton.png" },
+        { id: "exitButton", src: "./Assets/images/exitButton.png" },
+        { id: "nextButton", src: "./Assets/images/nextButton.png" },
+        { id: "backButton", src: "./Assets/images/backButton.png" },
+        { id: "ocean", src: "./Assets/images/ocean.gif" },
+        { id: "plane", src: "./Assets/images/plane.png" }
+    ];
+    function Preload() {
+        var loadQueue = new createjs.LoadQueue();
+        loadQueue.installPlugin(createjs.Sound);
+        loadQueue.on("complete", Start);
+        config.Game.ASSETS = loadQueue;
+        loadQueue.loadManifest(assetManifest);
+    }
     /**
      * Perform Initialization in the Start function
      *
@@ -58,6 +74,6 @@ var game = (function () {
         stage.addChild(currentScene);
         currentSceneState = config.Game.SCENE_STATE;
     }
-    window.addEventListener("load", Start);
+    window.addEventListener("load", Preload);
 })();
 //# sourceMappingURL=game.js.map

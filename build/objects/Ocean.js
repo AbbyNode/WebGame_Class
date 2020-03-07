@@ -17,7 +17,7 @@ var objects;
     var Ocean = /** @class */ (function (_super) {
         __extends(Ocean, _super);
         function Ocean() {
-            var _this = _super.call(this, "./Assets/images/ocean.gif") || this;
+            var _this = _super.call(this, config.Game.ASSETS.getResult("ocean")) || this;
             _this.Start();
             return _this;
         }
